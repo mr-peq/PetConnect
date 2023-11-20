@@ -11,7 +11,7 @@ User.destroy_all
 puts "Creating 5 new client users..."
 5.times do
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: false)
-
+  # Add a user photo in app/assets/images, THEN:
   # => change "photo.png" to your image file name, BOTH in File.open() and filename:
   user.photo.attach(io: File.open("#{Rails.root}/app/assets/images/photo.png"), filename: 'photo.png')
 end
@@ -19,13 +19,14 @@ end
 puts "Creating 5 new provider users..."
 5.times do
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: true)
+  # Add a user photo in app/assets/images, THEN:
   # => change "photo.png" to your image file name, BOTH in File.open() and filename:
   user.photo.attach(io: File.open("#{Rails.root}/app/assets/images/photo.png"), filename: 'photo.png')
 end
 
 puts "Creating 6 new services..."
 6.times do
-  Service.create!(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: Faker::Address.full_address)
+  Service.create!(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: Faker::Address.street_address)
 end
 
 puts "Creating 10 new bookings..."

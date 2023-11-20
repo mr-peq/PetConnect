@@ -4,17 +4,26 @@
 </div>
 
 <div class="services-content-container">
-  <div class="services-container row row-cols-1 row-cols-md-4 g-4">
+  <div class="services-container row row-cols-1 row-cols-md-2 g-4">
   <% @services.each do |service| %>
     <div class="col">
       <div class="card" style="position: relative;">
-        <%= link_to "", service_path(service), class: "card-link-to-service" %>
-        <img src="..." class="card-img-top" alt="...">
+        <%#= link_to "", service_path(service), class: "card-link-to-service" %>
+        <%= cl_image_tag service.user.photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
         <div class="card-body">
-          <h5 class="card-title"><%= service.title %></h5>
-          <h4 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name}" %></h4>
+          <div class="card-title-and-tags">
+            <h5 class="card-title" style="margin-bottom: 0;"><%= service.title.capitalize %></h5>
+            <ul class="list-inline">
+              <li class="list-inline-item tag-icon"><i class="fa-solid fa-dog"></i></li>
+              <li class="list-inline-item tag-icon"><i class="fa-solid fa-cat"></i></li>
+            </ul>
+          </div>
+          <h5 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name}" %></h5>
           <p class="card-text"><%= service.address %></p>
-          <b class="card-service-price"><%= service.price %>€</b>
+          <div class="card-price-and-details-btn">
+            <b class="card-service-price"><%= service.price %>€</b>
+            <%= link_to "see details", service_path(service), class: "btn btn-primary"%>
+          </div>
         </div>
       </div>
     </div>
