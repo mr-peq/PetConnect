@@ -6,7 +6,7 @@ puts "Clearing database..."
 Review.destroy_all
 Booking.destroy_all
 Service.destroy_all
-# User.destroy_all
+User.destroy_all
 
 # CREER LES USERS A LA MAIN PUIS RUN rails db:seed
 # puts "Creating 5 new client users..."
