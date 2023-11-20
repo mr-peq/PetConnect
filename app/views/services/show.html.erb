@@ -1,2 +1,66 @@
-<h1>Services#show</h1>
-<p>Find me in app/views/services/show.html.erb</p>
+<div class="container mt-4">
+  <!-- First Card: User Information and Rating -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow rounded-lg">
+        <div class="card-body d-flex align-items-center">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile Image" class="rounded-circle mr-3" style="width: 100px; height: 100px;">
+          <div>
+            <h5 class="mb-1"><%= @service.user.first_name %> <%= @service.user.last_name.chars.first %>.</h5>
+            <p class="mb-2 text-muted"><%= @service.address %></p>
+            <p>
+              <%# TO BE DONE: Add logic to sum ratings and display them %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Row: Other Services and Description -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card shadow rounded-lg">
+        <div class="card-body">
+          <h5 class="card-title">Services offered by <%= @service.user.first_name %></h5>
+          <% @service.user.services.each do |service| %>
+            <div class="d-flex justify-content-between py-2">
+              <span><%= service.title %></span>
+              <span><%= number_to_currency(service.price) %> €</span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Description -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow rounded-lg">
+        <div class="card-body">
+          <h5 class="card-title">Service Description</h5>
+          <p><%= @service.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="card shadow rounded-lg">
+    <div class="card-body">
+      <h5 class="card-title">Book This Service</h5>
+      <%= form_with model: [ @service, @service.bookings.new ], local: true, class: 'form' do |form| %>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= form.label :start_time %>
+            <%= form.datetime_select :start_time, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= form.label :end_time %>
+            <%= form.datetime_select :end_time, class: 'form-control' %>
+          </div>
+        </div>
+        <%= form.submit "Book Now", class: "btn btn-primary btn-lg btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,8 @@ class ServicesController < ApplicationController
   end
 
   def show
+    @service = Service.find(params[:id])
+    ## A passer en private et before_action après merging
   end
 
   def new
