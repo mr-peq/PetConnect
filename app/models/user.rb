@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :bookings, through: :services, dependent: :destroy
   has_many :reviews, through: :bookings, dependent: :destroy
+
+  has_one_attached :photo
 end
