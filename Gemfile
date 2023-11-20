@@ -73,3 +73,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+
+# ADD NEW GEMS HERE
+
+gem "devise"
