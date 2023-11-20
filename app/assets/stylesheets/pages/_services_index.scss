@@ -1,0 +1,19 @@
+.services-query-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid grey;
+  margin-bottom: 2em;
+  padding: 6em;
+  border-radius: 4px;
+}
+
+.services-content-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.services-map-container {
+  border: 2px solid grey;
+}

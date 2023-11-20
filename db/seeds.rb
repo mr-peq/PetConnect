@@ -6,17 +6,18 @@ puts "Clearing database..."
 Review.destroy_all
 Booking.destroy_all
 Service.destroy_all
-User.destroy_all
+# User.destroy_all
 
-puts "Creating 5 new client users..."
-5.times do
-  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: false)
-end
+# CREER LES USERS A LA MAIN PUIS RUN rails db:seed
+# puts "Creating 5 new client users..."
+# 5.times do
+#   User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: false)
+# end
 
-puts "Creating 5 new provider users..."
-5.times do
-  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: true)
-end
+# puts "Creating 5 new provider users..."
+# 5.times do
+#   User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: 123456, provider: true)
+# end
 
 puts "Creating 6 new services..."
 6.times do
@@ -31,7 +32,10 @@ end
 
 puts "Creating 10 new reviews..."
 10.times do
-  Review.create!(description: Faker::Lorem.words(number: 10).join(' '), rating: rand(1..5), user: User.where(provider: false).sample, booking: Booking.all.sample )
+  booking = Booking.all.sample
+  if booking.review.nil?
+    Review.create!(description: Faker::Lorem.words(number: 10).join(' '), rating: rand(1..5), user: User.where(provider: false).sample, booking: booking)
+  end
 end
 
 puts "Done."
