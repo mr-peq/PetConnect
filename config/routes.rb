@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root to: "pages#home"
-  resources :services
-  resources :bookings
-  resources :reviews, only: [:index, :show, :new, :create]
+  resources :services do
+    resources :bookings, only: [:new, :create]
+  end
+  resources :bookings, except: [:new, :create] do
+    resources :reviews, only: [:index, :show, :new, :create]
+  end
 end
 
 
