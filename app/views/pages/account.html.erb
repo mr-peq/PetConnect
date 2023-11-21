@@ -1,0 +1,15 @@
+<h1>Welcome to your dashboard</h1>
+
+<%= cl_image_tag(@user.profile_picture.key, height: 300, width: 400, crop: :fill) %>
+
+<h3>My pets</h3>
+  <%= simple_form_for(@pet) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :pet_category, collection: PetCategory.all %>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit %>
+  <% end %>
+
+<h3>My services</h3>
+
+<h3>My bookings</h3>
