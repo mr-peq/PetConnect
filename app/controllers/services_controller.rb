@@ -1,6 +1,18 @@
 class ServicesController < ApplicationController
   def index
-    @services = Service.all
+    # link_to services_path(animal: "dog")
+    # if params[:animal] == dog
+    # @services = Service.where...
+    if params[:query].present?
+      @services = Service.global_search(params[:query])
+    else
+      @services = Service.all
+    end
+
+    if params[:animal] == "Dog"
+      services = Service.global_search(params[:query])
+      @services = services.joins(:pet_categories).where(pet_categories: { pet_category: "Dog" })
+    end
   end
 
   def show

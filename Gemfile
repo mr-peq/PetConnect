@@ -81,3 +81,4 @@ gem "devise"
 gem "cloudinary"
 gem "faker"
 gem "dotenv-rails"
+gem 'pg_search'
