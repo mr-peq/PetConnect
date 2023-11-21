@@ -5,12 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :services, dependent: :destroy
-  # This will give you all bookings for all services offered by the user
-  has_many :bookings, through: :services
-  # This will give you all reviews for all bookings for all services by the user
-  has_many :reviews, through: :bookings
+  has_many :bookings, through: :services, dependent: :destroy
+  has_many :reviews, through: :bookings, dependent: :destroy
 
   has_one_attached :photo
+
+  private
 
   def average_rating
     total_ratings = self.reviews.sum(:rating)
