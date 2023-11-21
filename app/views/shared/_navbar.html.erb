@@ -1,37 +1,46 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
-
+  <div class="container-fluid d-flex align-items-center">
+    <!-- Logo linking to Home Page -->
+    <a class="navbar-brand" href="/">
+      <%= cl_image_tag("lseu2bjrbliwklobmzmx", alt: "Logo", width: 200, crop: :scale) %>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
+
+        <!-- Buttons -->
+        <li class="nav-item active">
+          <a class="nav-link" href="/services/new">Offer my service</a>
+        </li>
+
+          <!-- User Avatar and Dropdown -->
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            <% if user_signed_in? %>
+          <!-- If user is authenticated -->
+          <%= cl_image_tag("td70rxw5yo5ndroz3k90zfmn1m6g", alt: "User Avatar", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/account">My Account</a>
+              <a class="dropdown-item" href="/my_bookings">My Bookings</a>
+              <% if current_user.provider? %>
+                <a class="dropdown-item" href="/my_services">My Services</a>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" data-turbo-method="delete" href="/users/sign_out">Log out</a>
             </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
+          <% else %>
+          <!-- If user is not authenticated -->
+          <a class="nav-link avatar" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="avatar fa-solid fa-circle-user avatar" style="color: #6459a5;"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/users/sign_up">Sign Up</a>
+            <a class="dropdown-item" href="/users/sign_in">Log In</a>
+          </div>
+          <% end %>
+      </li>
       </ul>
     </div>
   </div>

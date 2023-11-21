@@ -10,3 +10,39 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.avatar {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 25px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 130px; /* Adjust this value as needed */
+  height: auto; /* This maintains the aspect ratio */
+}
+
+.navbar-lewagon .container-fluid {
+  display: flex;        /* Enable Flexbox */
+  align-items: center;  /* Vertically center all items */
+}
+
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
