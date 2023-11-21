@@ -1,1 +1,42 @@
-// Specific CSS for your home-page
+/* Specific CSS for your home-page */
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 250px 0; /* Increased padding for more height */
+}
+
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.banner p {
+  font-size: 20px;
+  color: white;
+  opacity: .7;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Additional styles for the search button */
+.btn-large {
+  padding: 15px 30px; /* Larger padding for a bigger button */
+  font-size: 20px; /* Larger font size */
+}
+
+.btn-success {
+  background-color: #30A483; /* Bootstrap green color */
+  border-color: #30A483;
+  border-radius: 12px;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #E05901; /* Bootstrap green color */
+  border-color: #E05901;
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+}
