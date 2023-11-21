@@ -17,3 +17,33 @@
 .services-map-container {
   border: 2px solid grey;
 }
+
+.card-link-to-service {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.card-service-provider-image {
+  height: 200px;
+}
+
+.card-title-and-tags {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.tag-icon {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.card-price-and-details-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
