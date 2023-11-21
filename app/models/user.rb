@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :bookings, through: :services, dependent: :destroy
   has_many :reviews, through: :bookings, dependent: :destroy
   has_one :pet, dependent: :destroy
-
+  has_one_attached :profile_picture
   has_many_attached :photos
 
   def average_rating
