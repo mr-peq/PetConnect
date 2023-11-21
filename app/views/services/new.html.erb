@@ -1,2 +1,12 @@
-<h1>Services#new</h1>
-<p>Find me in app/views/services/new.html.erb</p>
+<h1>What service do you want to add ?</h1>
+<!-- <p>Find me in app/views/services/new.html.erb</p> -->
+
+<%= simple_form_for(@service) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :availabilities %>
+  <%= f.input :user %>
+  <%= f.input :address %>
+  <%= f.submit %>
+<% end %>
