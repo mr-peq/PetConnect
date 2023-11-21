@@ -14,7 +14,7 @@ class Service < ApplicationRecord
 
   pg_search_scope :category_search,
     associated_against: {
-      service_pet_category: [:pet_category]
+      pet_categories: [:pet_category]
     }
 
   has_many :bookings, dependent: :destroy

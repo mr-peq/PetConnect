@@ -6,9 +6,9 @@ export default class extends Controller {
     console.log("Logged");
   }
 
-  static targets = ["query"]
+  static targets = ["query", "services"]
   static values = {
-    pig: String,
+    dog: String,
     cat: String,
     kangaroo: String,
     rabbit: String,
@@ -20,10 +20,25 @@ export default class extends Controller {
   filter(e) {
     e.preventDefault();
     console.log('Reached filter successfully');
-    const query = this.queryTarget.firstElementChild.value
 
-    fetch(`/services?query=${query}`)
-    console.log(this.queryTarget);
+    const pet_categories = ['Dog', 'Cat', 'Kangaroo', 'Rabbit', 'Ferret', 'Snake', 'Guinea Pig']
+    const query = this.queryTarget.firstElementChild.value
+    const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
+
+    console.log(filtersArray);
+
+    const url = `/services?query=${query}&filters=${filtersArray}`
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Accept": "application/json" },
+    })
+    .then(response => response.json())
+    .then((data) => {
+      // this.servicesTarget.innerHTML = ""
+      this.servicesTarget.innerHTML = data.inserted_items
+      // this.servicesTarget.insertAdjacentHTML('beforeend', data.inserted_items)
+    })
   }
 
   highlight(e) {
@@ -32,52 +47,52 @@ export default class extends Controller {
     btn.classList.toggle('btn-selected');
 
     if (btn.classList.contains('filter-dog-button')) {
-      if (btn.getAttribute('data-filtered-queries-dog-value') == "") {
-        btn.setAttribute('data-filtered-queries-dog-value', 'Dog');
+      if (this.dogValue == "") {
+        this.dogValue = "Dog"
       } else {
-        btn.setAttribute('data-filtered-queries-dog-value', '');
+        this.dogValue = ""
       }
     }
     else if (btn.classList.contains('filter-cat-button')) {
-      if (btn.getAttribute('data-filtered-queries-cat-value') == "") {
-        btn.setAttribute('data-filtered-queries-cat-value', 'Cat');
+      if (this.catValue == "") {
+        this.catValue = "Cat";
       } else {
-        btn.setAttribute('data-filtered-queries-cat-value', '');
+        this.catValue = "";
       }
     }
     else if (btn.classList.contains('filter-kangaroo-button')) {
-      if (btn.getAttribute('data-filtered-queries-kangaroo-value') == "") {
-        btn.setAttribute('data-filtered-queries-kangaroo-value', 'Kangaroo');
+      if (this.kangarooValue == "") {
+        this.kangarooValue = "Kangaroo";
       } else {
-        btn.setAttribute('data-filtered-queries-kangaroo-value', '');
+        this.kangarooValue = "";
       }
     }
     else if (btn.classList.contains('filter-rabbit-button')) {
-      if (btn.getAttribute('data-filtered-queries-rabbit-value') == "") {
-        btn.setAttribute('data-filtered-queries-rabbit-value', 'Rabbit');
+      if (this.rabbitValue == "") {
+        this.rabbitValue = "Rabbit";
       } else {
-        btn.setAttribute('data-filtered-queries-rabbit-value', '');
+        this.rabbitValue = "";
       }
     }
     else if (btn.classList.contains('filter-ferret-button')) {
-      if (btn.getAttribute('data-filtered-queries-ferret-value') == "") {
-        btn.setAttribute('data-filtered-queries-ferret-value', 'Ferret');
+      if (this.ferretValue == "") {
+        this.ferretValue = "Ferret";
       } else {
-        btn.setAttribute('data-filtered-queries-ferret-value', '');
+        this.ferretValue = "";
       }
     }
     else if (btn.classList.contains('filter-snake-button')) {
-      if (btn.getAttribute('data-filtered-queries-snake-value') == "") {
-        btn.setAttribute('data-filtered-queries-snake-value', 'Snake');
+      if (this.snakeValue == "") {
+        this.snakeValue = "Snake";
       } else {
-        btn.setAttribute('data-filtered-queries-snake-value', '');
+        this.snakeValue = "";
       }
     }
     else if (btn.classList.contains('filter-guinea-pig-button')) {
-      if (btn.getAttribute('data-filtered-queries-pig-value') == "") {
-        btn.setAttribute('data-filtered-queries-pig-value', 'Guinea pig');
+      if (this.pigValue == "") {
+        this.pigValue = "Guinea Pig";
       } else {
-        btn.setAttribute('data-filtered-queries-pig-value', '');
+        this.pigValue = "";
       }
     }
   }
