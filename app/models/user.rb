@@ -7,10 +7,9 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :bookings, through: :services, dependent: :destroy
   has_many :reviews, through: :bookings, dependent: :destroy
+  has_one :pet, dependent: :destroy
 
-  has_one_attached :photo
-
-  private
+  has_many_attached :photos
 
   def average_rating
     total_ratings = self.reviews.sum(:rating)
