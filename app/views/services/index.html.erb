@@ -1,6 +1,45 @@
 <h1>Services#index</h1>
-<div class="services-query-form">
-  <h2> Filtering search bar goes here </h2>
+<div class="services-queries" data-controller="filtered-queries">
+  <div class="services-query-form" >
+    <%= form_with url: services_path, method: :get, data: { filtered_queries_target: "query", action: "submit->filtered-queries#filter" }, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <% end %>
+  </div>
+  <div class="filter-buttons-container">
+    <button class="filter-dog-button" data-action="click->filtered-queries#highlight" data-filtered-queries-dog-value="">
+      dog
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-cat-button" data-action="click->filtered-queries#highlight" data-filtered-queries-cat-value="">
+      cat
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-kangaroo-button" data-action="click->filtered-queries#highlight" data-filtered-queries-kangaroo-value="">
+      kang
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-rabbit-button" data-action="click->filtered-queries#highlight" data-filtered-queries-rabbit-value="">
+      rabbit
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-ferret-button" data-action="click->filtered-queries#highlight" data-filtered-queries-ferret-value="">
+      ferret
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-snake-button" data-action="click->filtered-queries#highlight" data-filtered-queries-snake-value="">
+      snake
+      <%# fontawesome_icon %>
+    </button>
+    <button class="filter-guinea-pig-button" data-action="click->filtered-queries#highlight" data-filtered-queries-pig-value="">
+      piggy
+      <%# fontawesome_icon %>
+    </button>
+  </div>
 </div>
 
 <div class="services-content-container">
@@ -9,7 +48,9 @@
     <div class="col">
       <div class="card" style="position: relative;">
         <%#= link_to "", service_path(service), class: "card-link-to-service" %>
-        <%= cl_image_tag service.user.photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
+        <% service.user.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
+        <% end %>
         <div class="card-body">
           <div class="card-title-and-tags">
             <h5 class="card-title" style="margin-bottom: 0;"><%= service.title.capitalize %></h5>

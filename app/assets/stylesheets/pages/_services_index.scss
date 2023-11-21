@@ -1,11 +1,37 @@
+.services-queries {
+  border: 2px solid grey;
+  margin-bottom: 2em;
+  padding: 3em;
+  border-radius: 4px;
+}
+
 .services-query-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid grey;
   margin-bottom: 2em;
-  padding: 6em;
+}
+
+.filter-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.filter-dog-button,
+.filter-cat-button,
+.filter-kangaroo-button,
+.filter-rabbit-button,
+.filter-ferret-button,
+.filter-snake-button,
+.filter-guinea-pig-button {
+  border: 1px solid black;
+  padding: 1em;
   border-radius: 4px;
+}
+
+.btn-selected {
+  background-color: aquamarine;
 }
 
 .services-content-container {
