@@ -1,13 +1,14 @@
 <div class="container" data-controller="filtered-queries">
   <div class="services-queries">
     <div class="services-query-form" >
-      <%= form_with url: services_path, method: :get, data: { filtered_queries_target: "query", action: "submit->filtered-queries#filter" }, class: "d-flex" do %>
+      <%= form_with url: services_path, method: :get, data: { filtered_queries_target: "query", action: "submit->filtered-queries#filter" }, class: "d-flex query-form" do %>
           <%= text_field_tag :query,
                 params[:query],
                 class: "form-control",
-                placeholder: "Type a keyword"
+                placeholder: "Search a type of service, a name, an address... ",
+                style: "margin-bottom: 1em;"
             %>
-          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+          <%= submit_tag "Apply filters", name: "", class: "btn btn-primary", style: "width: 200px;" %>
         <% end %>
     </div>
     <hr>
@@ -61,8 +62,5 @@
     <div class="services-container row row-cols-1 row-cols-md-2 g-4" data-filtered-queries-target="services">
       <%= render "services", services: @services %>
     </div>
-    <div class="services-map-container">
-      <h2>Map goes here</h2>
-    </div>
-  </div>
+    <%= render "map", markers: @markers %>
 </div>

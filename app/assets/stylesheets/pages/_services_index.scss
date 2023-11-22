@@ -13,6 +13,12 @@
   margin-bottom: 2em;
 }
 
+.query-form {
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+}
+
 .filter-buttons-container {
   display: flex;
   align-items: center;
