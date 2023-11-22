@@ -1,82 +1,86 @@
-<div class="banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
   <div class="container">
     <h1><strong>Loving Pet Care in Your Neighbourhood!</strong></h1>
     <p>Book trusted sitters, dog walkers, and many more services.</p>
-    <a class="btn btn-large btn-success" href="#">Search</a> <!-- Changed class for styling -->
+    <a class="btn btn-large btn-success" href="/services">Search</a> <!-- Changed class for styling -->
   </div>
 </div>
-
+<br>
 <div class="container my-5">
   <h2 class="mb-4">Services tailored for every pet</h2>
-  <div class="row">
-    <!-- Card for Dog -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=2688&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Dog</h4>
-        </div>
-      </div>
-    </div>
+  <div class="d-flex justify-content-between align-items-center" data-controller="scroll"> <!-- Wrapper for cards and arrows -->
+    <button data-action="click->scroll#scrollLeft" class="btn-scroll">&#10094;</button>
+        <div class="card-container" data-scroll-target="cards">
+          <!-- Card for Dog -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Dog</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Cat -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1606225457115-9b0de873c5db?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Cat</h4>
-        </div>
-      </div>
-    </div>
+          <!-- Card for Cat -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596854273338-cbf078ec7071?q=80&w=2980&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Cat</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Kangaroo -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1611489473774-5d881f1153f1?q=80&w=3113&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Kangaroo</h4>
-        </div>
-      </div>
-    </div>
+          <!-- Card for Kangaroo -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1611489473774-5d881f1153f1?q=80&w=3113&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Kangaroo</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Rabbit -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1591382386627-349b692688ff?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Rabbit</h4>
-        </div>
-      </div>
-    </div>
+          <!-- Card for Rabbit -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1591382386627-349b692688ff?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+                <div class="card-body">
+                <h4 class="card-title">Rabbit</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Guinea Pig -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1612267168669-679c961c5b31?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Guina Pig</h4>
-        </div>
-      </div>
-    </div>
+          <!-- Card for Guinea Pig -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1612267168669-679c961c5b31?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Guinea Pig</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Ferret -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1615087240969-eeff2fa558f2?q=80&w=2980&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Ferret</h4>
-        </div>
-      </div>
-    </div>
+          <!-- Card for Ferret -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1615087240969-eeff2fa558f2?q=80&w=2980&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Ferret</h4>
+              </div>
+            </div>
+          </div>
 
-    <!-- Card for Snake -->
-    <div class="col-md-3 mb-3">
-      <div class="card text-white">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1538439907460-1596cafd4eff?q=80&w=2956&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h4 class="card-title text-center">Snake</h4>
+          <!-- Card for Snake -->
+          <div class="col-md-3 mb-3">
+            <div class="card text-center">
+              <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1538439907460-1596cafd4eff?q=80&w=2956&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 200px; background-size: cover; background-position: center;"></div>
+              <div class="card-body">
+                <h4 class="card-title">Snake</h4>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+    <button data-action="click->scroll#scrollRight" class="btn-scroll">&#10095;</button> <!-- Right arrow -->
   </div>
 </div>

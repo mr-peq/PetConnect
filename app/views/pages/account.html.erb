@@ -1,15 +1,59 @@
-<h1>Welcome to your dashboard</h1>
+<div class="container mt-4">
+  <h1>Welcome to your dashboard</h1>
 
-<%= cl_image_tag(@user.profile_picture.key, height: 300, width: 400, crop: :fill) %>
-
-<h3>My pets</h3>
-  <%= simple_form_for(@pet) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :pet_category, collection: PetCategory.all %>
-    <%= f.input :photo, as: :file %>
-    <%= f.submit %>
+  <% if current_user.profile_picture.attached? %>
+    <%= cl_image_tag(@user.profile_picture.key) %>
+  <% else %>
+    <!-- Default avatar image if no profile picture -->
+    <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Avatar" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
   <% end %>
 
-<h3>My services</h3>
+  <h3>My pets</h3>
+    <%= simple_form_for(@pet) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :pet_category, collection: PetCategory.all %>
+      <%= f.input :photo, as: :file %>
+      <%= f.submit %>
+    <% end %>
 
-<h3>My bookings</h3>
+  <br>
+  <br>
+  <br>
+  <!-- My Services Section -->
+  <div id="my-services">
+    <h3>My Services</h3>
+    <div class="row">
+      <% @user.services.each do |service| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= service.title %></h5>
+              <p class="card-text"><%= service.description %></p>
+              <p class="card-text"><strong>Price:</strong> <%= number_to_currency(service.price, unit: '€') %></p>
+              <%= link_to 'View Service', service_path(service), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- My Bookings Section -->
+  <div id="my-bookings">
+    <h3>My Bookings</h3>
+    <div class="row">
+      <% @user.bookings.each do |booking| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= booking.service.title %></h5>
+              <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
+              <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
+              <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

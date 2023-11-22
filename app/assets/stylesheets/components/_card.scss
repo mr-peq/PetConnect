@@ -1,0 +1,38 @@
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  overflow: hidden; /* Ensures nothing spills out of the card's rounded corners */
+}
+
+.card-img {
+  height: 200px; /* Fixed height for image */
+  background-size: contain;
+  background-position: center;
+}
+
+.card-header {
+  background-color: #30A483; /* Secondary color for headers */
+  color: white;
+  border-radius: 15px;
+}
+
+.card-title {
+  margin: 0; /* Removes default margin */
+  color: #6959A5; /* Tertiary color for titles */
+}
+
+.card-body {
+  background-color: white; /* Ensures white background below the image */
+}
+
+.card-container {
+  display: flex;
+  overflow: hidden;
+  width: calc(350px * 4); /* Assuming each card is 250px wide */
+  scroll-behavior: smooth;
+}
+
+.card-container .card {
+  flex: 0 0 250px; /* flex-basis of 250px */
+  margin: 0 10px; /* Adjust margin as needed */
+}
