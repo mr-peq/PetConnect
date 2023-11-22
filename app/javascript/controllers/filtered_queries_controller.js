@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
 
 // Connects to data-controller="filtered-queries"
 export default class extends Controller {
@@ -25,8 +26,8 @@ export default class extends Controller {
     const query = this.queryTarget.firstElementChild.value
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
 
-    console.log(filtersArray);
-    console.log(query);
+    // console.log(filtersArray);
+    // console.log(query);
 
     // if (filtersArray.length === 0 && query !== "") {
     //   const defaultUrl = '/services'
@@ -37,17 +38,8 @@ export default class extends Controller {
     // }
 
     const url = `/services?query=${query}&filters=${filtersArray}`
-
-    fetch(url, {
-      method: "GET",
-      headers: { "Accept": "application/json" },
-    })
-    .then(response => response.json())
-    .then((data) => {
-      // this.servicesTarget.innerHTML = ""
-      this.servicesTarget.innerHTML = data.inserted_items
-      // this.servicesTarget.insertAdjacentHTML('beforeend', data.inserted_items)
-    })
+    console.log(url);
+    Turbo.visit(url)
   }
 
   highlight(e) {

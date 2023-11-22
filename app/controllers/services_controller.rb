@@ -1,53 +1,31 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  
+
   skip_before_action :authenticate_user!, only: [:index]
   respond_to :html, :json
 
 
   def index
     @services = Service.all
-    # @markers = @services.geocoded.map do |service|
-    #   {
-    #     lat: service.latitude,
-    #     lng: service.longitude
-    #   }
-    # end
 
-    respond_to do |format|
-      if params[:query].present? && params[:query] != ""
-        @services = Service.global_search(params[:query])
-        if params[:filters].present? && params[:filters] != ""
-          services_ids = match_filters(@services)
-          @services = @services.find(services_ids.flatten)
-          # @markers = @services.geocoded.map do |service|
-          #   {
-          #     lat: service.latitude,
-          #     lng: service.longitude
-          #   }
-          # end
-        end
-        # format.json
-        # format.html
-      else
-        if params[:filters].present? && params[:filters] != ""
-          services_ids = match_filters(@services)
-          @services = Service.find(services_ids.flatten)
-          # @markers = @services.geocoded.map do |service|
-          #   {
-          #     lat: service.latitude,
-          #     lng: service.longitude
-          #   }
-          # end
-        end
-        # format.json
-        # format.html
+    if params[:query].present? && params[:query] != ""
+      @services = Service.global_search(params[:query])
+      if params[:filters].present? && params[:filters] != ""
+        services_ids = match_filters(@services)
+        @services = @services.where(id: services_ids.flatten)
       end
-
-      format.json
-      format.html
+    else
+      if params[:filters].present? && params[:filters] != ""
+        services_ids = match_filters(@services)
+        @services = @services.where(id: services_ids.flatten)
+      end
     end
-
+    @markers = @services.geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude
+      }
+    end
   end
 
   def show

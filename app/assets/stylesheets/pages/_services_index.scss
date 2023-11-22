@@ -1,9 +1,7 @@
+
 .services-queries {
-  border: 2px solid grey;
   margin-bottom: 2em;
   margin-top: 2em;
-  padding: 3em;
-  border-radius: 4px;
 }
 
 .services-query-form {
@@ -11,6 +9,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2em;
+  height: 70px;
 }
 
 .query-form {
@@ -23,6 +22,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 60px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .filter-button {
@@ -43,25 +45,28 @@
   background: inherit;
   color: #595959;
 
-  i {
-    font-size: 1.8em;
-  }
-
   &:hover {
     color: black;
+    .icon {
+      filter: opacity(100%);
+    }
   }
 }
 
 .icon {
-  height: 50px;
-  filter: opacity(60%)
+  height: 35px;
+  filter: opacity(50%);
+
+  // &:hover {
+  //   filter: opacity(100%);
+  // }
 }
 
 .btn-selected {
   color: black;
   p {
     text-decoration: underline;
-    text-underline-offset: .5em;
+    text-underline-offset: .4em;
   }
   .icon {
     filter: opacity(100%);
