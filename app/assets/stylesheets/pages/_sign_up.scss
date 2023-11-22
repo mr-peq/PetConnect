@@ -1,0 +1,36 @@
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  h2 {
+    color: #333;
+    font-size: 2rem; // reduced font size for the title
+  }
+
+  .form-signup {
+    .form-control, .form-control-file {
+      border-radius: 5px;
+      font-size: 0.9rem; // smaller font size for form inputs
+    }
+
+    .form-group {
+      margin-bottom: 10px; // reduced margin for form groups
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      padding: 10px 20px; // reduced padding for button
+      font-size: 1rem; // adjusted font size for button
+    }
+
+    .btn-primary:hover {
+      background-color: darken(#007bff, 5%);
+      border-color: darken(#007bff, 5%);
+    }
+  }
+}

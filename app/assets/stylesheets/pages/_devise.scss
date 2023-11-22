@@ -1,0 +1,35 @@
+.devise-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.devise-link {
+  display: block;
+  margin: 10px auto;
+  color: #6959A5; /* Tertiary color */
+  transition: color 0.3s ease;
+}
+
+.devise-link:hover {
+  color: #30A483; /* Primary color */
+}
+
+.omniauth-links {
+  margin-top: 20px;
+}
+
+.omniauth-button {
+  display: block;
+  margin: 10px auto;
+  background-color: #F5B2B1; /* Accent color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.omniauth-button:hover {
+  background-color: lighten(#F5B2B1, 10%);
+}
