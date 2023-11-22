@@ -38,11 +38,31 @@
   </div>
 
   <h3>My pets</h3>
+
+  <% if @user.pet %>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <% if @user.pet.pet_picture.attached? %>
+            <%= cl_image_tag(@user.pet.pet_picture.key, class: 'user-avatar', height: 50) %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1574870111867-089730e5a72b?q=80&w=2987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Pet Image" class="card-img" />
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <div>
+            <h5 class="card-title"><%= @user.pet.name %></h5>
+            <p class="card-text"><%= @user.pet.pet_category.pet_category %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <!-- Display the button to add a pet if no pet is present -->
     <div class="add-pet" data-controller="modal">
       <!-- Trigger/Open The Modal -->
       <button data-action="click->modal#open" class="btn btn-primary">Add my pet</button>
-
-      <!-- The Modal -->
+      <!-- Modal for adding pet -->
       <div data-action="click@window->modal#clickOutside">
         <!-- Modal content -->
         <div class="modal" data-modal-target="modal">
@@ -50,17 +70,16 @@
             <span data-action="click->modal#close" class="close">&times;</span>
             <h3>Add a New Pet</h3>
             <%= simple_form_for(@pet, html: { class: 'form-modal' }) do |f| %>
+              <%= f.error_notification %>
               <%= f.input :name, input_html: { class: 'form-control' } %>
               <%= f.input :pet_category_id, collection: PetCategory.all.pluck(:pet_category, :id), input_html: { class: 'form-select' } %>
-              <%= f.input :photo, as: :file, input_html: { class: 'form-control' } %>
+              <%= f.input :pet_picture, as: :file, input_html: { class: 'form-control' } %>
               <%= f.submit "Add Pet", class: "btn btn-success" %>
             <% end %>
           </div>
         </div>
-      </div>
-    </div>
-  <br>
-  <br>
+      </div>    </div>
+  <% end %>
   <br>
   <!-- My Services Section -->
   <div id="my-services">
