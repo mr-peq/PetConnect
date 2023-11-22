@@ -1,11 +1,18 @@
 <div class="container mt-4">
   <!-- Pet Care Provider Card -->
+
   <div class="row mb-4">
     <div class="col-12">
         <div class="row no-gutters">
           <!-- Profile Image -->
-          <div class="col-md-4 d-flex align-items-center justify-content-center">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile Image" class="rounded-circle" style="width: 150px; height: 150px;">
+          <div class="col-md-4 d-flex float-left">
+            <!-- <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile Image" class="rounded-circle" style="width: 150px; height: 150px;"> -->
+            <% if current_user.profile_picture.attached? %>
+                <%= cl_image_tag(current_user.profile_picture.key, class: "avatar-big") %>
+              <% else %>
+                <!-- Default avatar image if no profile picture -->
+                <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar-big" />
+              <% end %>
           </div>
           <!-- Provider Info -->
           <div class="col-md-8">
@@ -27,6 +34,7 @@
         </div>
     </div>
   </div>
+
   <br>
   <br>
   <!-- Services List and Description Row -->
@@ -88,9 +96,8 @@
       </div>
     </div>
   </div>
-</div>
 
-  <!-- About Section -->
+ <!-- About Section -->
   <div class="row mt-4">
     <div class="col-12">
       <div class="card shadow">
@@ -134,5 +141,6 @@
       </div>
     </div>
   </div>
-  <br>
-  <br>
+
+
+</div>
