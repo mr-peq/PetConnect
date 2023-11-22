@@ -46,11 +46,19 @@
   }
 }
 
+.icon {
+  height: 50px;
+  filter: opacity(60%)
+}
+
 .btn-selected {
   color: black;
   p {
     text-decoration: underline;
     text-underline-offset: .5em;
+  }
+  .icon {
+    filter: opacity(100%);
   }
 }
 
