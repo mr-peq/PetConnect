@@ -26,6 +26,15 @@ export default class extends Controller {
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
 
     console.log(filtersArray);
+    console.log(query);
+
+    // if (filtersArray.length === 0 && query !== "") {
+    //   const defaultUrl = '/services'
+    //   fetch(defaultUrlurl,  {
+    //     method: "GET",
+
+    //   })
+    // }
 
     const url = `/services?query=${query}&filters=${filtersArray}`
 

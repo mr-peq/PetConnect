@@ -3,38 +3,26 @@ class ServicesController < ApplicationController
   respond_to :html, :json
 
   def index
+    @services = Service.all
+
     respond_to do |format|
       if params[:query].present? && params[:query] != ""
         @services = Service.global_search(params[:query])
+        if params[:filters].present? && params[:filters] != ""
+          services_ids = match_filters(@services)
+          @services = @services.find(services_ids.flatten)
+        end
         format.json
         format.html
       else
-        @services = Service.all
-        format.html
-      end
-
-
-      if params[:filters].present? && params[:filters] != ""
-        puts params[:filters]
-        filters = params[:filters].split(',')
-        puts filters
-        services_ids = []
-        filters.each do |filter|
-          services_ids << @services.category_search(filter).ids
+        if params[:filters].present? && params[:filters] != ""
+          services_ids = match_filters(@services)
+          @services = Service.find(services_ids.flatten)
         end
-        @services = Service.find(services_ids.flatten)
         format.json
         format.html
       end
     end
-
-    # if params[:animal] == "Dog"
-    #   services = Service.global_search(params[:query])
-    #   @services = services.joins(:pet_categories).where(pet_categories: { pet_category: "Dog" })
-    # end
-    # link_to services_path(animal: "dog")
-    # if params[:animal] == dog
-    # @services = Service.where...
   end
 
   def show
@@ -68,4 +56,12 @@ class ServicesController < ApplicationController
     params.require(:service).permit(:title, :description, :price, :availabilities, :user, :address)
   end
 
+  def match_filters(services)
+    filters = params[:filters].split(',')
+    services_ids = []
+    filters.each do |filter|
+      services_ids << services.category_search(filter).ids
+    end
+    services_ids
+  end
 end
