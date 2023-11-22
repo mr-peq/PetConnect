@@ -1,0 +1,31 @@
+<% services.each do |service| %>
+  <div class="col">
+    <div class="card" style="position: relative;">
+      <%#= link_to "", service_path(service), class: "card-link-to-service" %>
+      <% service.user.photos.each do |photo| %>
+        <%= cl_image_tag photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
+      <% end %>
+      <div class="card-body">
+        <div class="card-title-and-tags">
+          <h5 class="card-title" style="margin-bottom: 0;"><%= service.title.capitalize %></h5>
+          <div class="pet_categories">
+          <% service.pet_categories.each do |pet_category| %>
+            <p><%= pet_category.pet_category %></p>
+          <% end %>
+          </div>
+
+          <%# <ul class="list-inline">
+            <li class="list-inline-item tag-icon"><i class="fa-solid fa-dog"></i></li>
+            <li class="list-inline-item tag-icon"><i class="fa-solid fa-cat"></i></li>
+          </ul> %>
+        </div>
+        <h5 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name}" %></h5>
+        <p class="card-text"><%= service.address %></p>
+        <div class="card-price-and-details-btn">
+          <b class="card-service-price"><%= service.price %>€</b>
+          <%= link_to "see details", service_path(service), class: "btn btn-primary"%>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
