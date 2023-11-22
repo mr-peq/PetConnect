@@ -1,4 +1,16 @@
+// .navbar-hidden {
+//   transform: translateY(-100%);
+//   transition: transform 0.3s ease-in;
+// }
+
+// .navbar-visible {
+//   transform: translateY(0);
+//   transition: transform 0.3s ease-out;
+// }
+
+
 .navbar-lewagon {
+  margin-bottom: 0;
   justify-content: space-between;
   background: white;
 }

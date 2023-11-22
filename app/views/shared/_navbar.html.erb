@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" data-controller="navbar">
   <div class="container-fluid d-flex align-items-center">
     <!-- Logo linking to Home Page -->
     <a class="navbar-brand" href="/">
@@ -20,12 +20,17 @@
           <li class="nav-item dropdown">
             <% if user_signed_in? %>
           <!-- If user is authenticated -->
-          <%= cl_image_tag("td70rxw5yo5ndroz3k90zfmn1m6g", alt: "User Avatar", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+              <% if current_user.profile_picture.attached? %>
+                <%= cl_image_tag(current_user.profile_picture.key, alt: "User Avatar", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }) %>
+              <% else %>
+                <!-- Default avatar image if no profile picture -->
+                <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Avatar" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+              <% end %>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/account">My Account</a>
-              <a class="dropdown-item" href="/my_bookings">My Bookings</a>
+              <a class="dropdown-item" href="/account#my-bookings">My Bookings</a>
               <% if current_user.provider? %>
-                <a class="dropdown-item" href="/my_services">My Services</a>
+                <a class="dropdown-item" href="/account#my-services">My Services</a>
               <% end %>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" data-turbo-method="delete" href="/users/sign_out">Log out</a>

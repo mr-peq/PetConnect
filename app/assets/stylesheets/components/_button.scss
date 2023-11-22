@@ -1,0 +1,19 @@
+.btn-primary {
+  background-color: #30A483; /* Main action color for buttons */
+  border: #30A483;
+  border-radius: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #E05901; /* Hover state color for buttons */
+  border-color: #E05901;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+.btn-scroll {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* Add more styles if necessary */
+}
