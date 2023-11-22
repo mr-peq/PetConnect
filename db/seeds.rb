@@ -34,8 +34,19 @@ end
 
 puts "Creating 6 new services..."
 services = %w[Walking Sitting Groom Visit Veterinarian]
+addresses = [
+  "16 rue clignancourt, Paris",
+  "4 boulevard Magenta, Paris",
+  "31 Rue Mouffetard, Paris",
+  "Glacière, Paris",
+  "Arc de Triomphe, Paris",
+  "70 rue Rivoli, Paris"
+]
+i = 0
 6.times do
-  service = Service.create!(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: Faker::Address.street_address)
+  address = addresses[i]
+  i += 1
+  service = Service.create!(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: address)
   ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
   ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
 end

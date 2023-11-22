@@ -1,6 +1,9 @@
 class Service < ApplicationRecord
   belongs_to :user
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   include PgSearch::Model
 
   pg_search_scope :global_search,
@@ -14,7 +17,7 @@ class Service < ApplicationRecord
 
   pg_search_scope :category_search,
     associated_against: {
-      service_pet_category: [:pet_category]
+      pet_categories: [:pet_category]
     }
 
   has_many :bookings, dependent: :destroy
