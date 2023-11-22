@@ -1,18 +1,18 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  
+
   skip_before_action :authenticate_user!, only: [:index]
   respond_to :html, :json
 
 
   def index
     @services = Service.all
-    # @markers = @services.geocoded.map do |service|
-    #   {
-    #     lat: service.latitude,
-    #     lng: service.longitude
-    #   }
-    # end
+    @markers = @services.geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude
+      }
+    end
 
     respond_to do |format|
       if params[:query].present? && params[:query] != ""
@@ -20,12 +20,12 @@ class ServicesController < ApplicationController
         if params[:filters].present? && params[:filters] != ""
           services_ids = match_filters(@services)
           @services = @services.find(services_ids.flatten)
-          # @markers = @services.geocoded.map do |service|
-          #   {
-          #     lat: service.latitude,
-          #     lng: service.longitude
-          #   }
-          # end
+          @markers = @services.geocoded.map do |service|
+            {
+              lat: service.latitude,
+              lng: service.longitude
+            }
+          end
         end
         # format.json
         # format.html
@@ -33,12 +33,12 @@ class ServicesController < ApplicationController
         if params[:filters].present? && params[:filters] != ""
           services_ids = match_filters(@services)
           @services = Service.find(services_ids.flatten)
-          # @markers = @services.geocoded.map do |service|
-          #   {
-          #     lat: service.latitude,
-          #     lng: service.longitude
-          #   }
-          # end
+          @markers = @services.geocoded.map do |service|
+            {
+              lat: service.latitude,
+              lng: service.longitude
+            }
+          end
         end
         # format.json
         # format.html

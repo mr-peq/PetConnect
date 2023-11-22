@@ -57,10 +57,7 @@
       </div>
     </div>
   </div>
-
   <div class="services-content-container">
-    <div class="services-container row row-cols-1 row-cols-md-2 g-4" data-filtered-queries-target="services">
-      <%= render "services", services: @services %>
-    </div>
-    <%= render "map", markers: @markers %>
+    <%= render "services", services: @services, markers: @markers %>
+  </div>
 </div>
