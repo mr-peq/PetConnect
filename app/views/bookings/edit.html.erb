@@ -1,2 +1,19 @@
-<h1>Bookings#edit</h1>
-<p>Find me in app/views/bookings/edit.html.erb</p>
+  <!-- Booking Form -->
+    <div class="col-md-6">
+      <div class="card shadow my-4" style="height: 400px; border-radius: 15px;">
+        <div class="card-body">
+          <h5 class="card-title">Book <%= @service.user.first_name %> - Service: <%= @service.title %></h5>
+          <%= simple_form_for([@service, @service.bookings.new], wrapper: :vertical_form, html: { class: 'form-horizontal' }) do |f| %>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <%= f.input :date, as: :string, label: 'Choose a date', input_html: { data: { controller: "datepicker" } }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
+                <%= f.input :start_time, as: :time, label: 'Choose a time', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
+              </div>
+            </div>
+            <%= f.button :submit, "Book Now", class: "btn btn-primary btn-lg btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
