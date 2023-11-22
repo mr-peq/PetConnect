@@ -7,47 +7,25 @@ class ServicesController < ApplicationController
 
   def index
     @services = Service.all
+
+    if params[:query].present? && params[:query] != ""
+      @services = Service.global_search(params[:query])
+      if params[:filters].present? && params[:filters] != ""
+        services_ids = match_filters(@services)
+        @services = @services.where(id: services_ids.flatten)
+      end
+    else
+      if params[:filters].present? && params[:filters] != ""
+        services_ids = match_filters(@services)
+        @services = @services.where(id: services_ids.flatten)
+      end
+    end
     @markers = @services.geocoded.map do |service|
       {
         lat: service.latitude,
         lng: service.longitude
       }
     end
-
-    respond_to do |format|
-      if params[:query].present? && params[:query] != ""
-        @services = Service.global_search(params[:query])
-        if params[:filters].present? && params[:filters] != ""
-          services_ids = match_filters(@services)
-          @services = @services.find(services_ids.flatten)
-          @markers = @services.geocoded.map do |service|
-            {
-              lat: service.latitude,
-              lng: service.longitude
-            }
-          end
-        end
-        # format.json
-        # format.html
-      else
-        if params[:filters].present? && params[:filters] != ""
-          services_ids = match_filters(@services)
-          @services = Service.find(services_ids.flatten)
-          @markers = @services.geocoded.map do |service|
-            {
-              lat: service.latitude,
-              lng: service.longitude
-            }
-          end
-        end
-        # format.json
-        # format.html
-      end
-
-      format.json
-      format.html
-    end
-
   end
 
   def show

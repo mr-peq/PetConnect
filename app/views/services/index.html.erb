@@ -1,4 +1,4 @@
-<div class="container" data-controller="filtered-queries">
+<div class="container no-horizontal-flow" data-controller="filtered-queries">
   <div class="services-queries">
     <div class="services-query-form" >
       <%= form_with url: services_path, method: :get, data: { filtered_queries_target: "query", action: "submit->filtered-queries#filter" }, class: "d-flex query-form" do %>
@@ -6,7 +6,7 @@
                 params[:query],
                 class: "form-control",
                 placeholder: "Search a type of service, a name, an address... ",
-                style: "margin-bottom: 1em;"
+                style: "margin-bottom: 1em; background-color: white;"
             %>
           <%= submit_tag "Apply filters", name: "", class: "btn btn-primary", style: "width: 200px;" %>
         <% end %>
@@ -56,6 +56,7 @@
         </button>
       </div>
     </div>
+    <hr>
   </div>
   <div class="services-content-container">
     <%= render "services", services: @services, markers: @markers %>

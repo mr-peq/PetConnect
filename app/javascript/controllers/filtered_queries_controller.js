@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
 
 // Connects to data-controller="filtered-queries"
 export default class extends Controller {
@@ -37,23 +38,8 @@ export default class extends Controller {
     // }
 
     const url = `/services?query=${query}&filters=${filtersArray}`
-
-    // turbo.visit(url)
-    fetch(url, {
-      method: "GET",
-      headers: { "Accept": "application/json" },
-    })
-    .then(response => {
-      console.log(response);
-      response.json()
-      console.log(response.json());
-    })
-    .then((data) => {
-      // this.servicesTarget.innerHTML = ""
-      console.log(data);
-      this.servicesTarget.innerHTML = data.inserted_items
-      // this.servicesTarget.insertAdjacentHTML('beforeend', data.inserted_items)
-    })
+    console.log(url);
+    Turbo.visit(url)
   }
 
   highlight(e) {
