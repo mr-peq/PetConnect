@@ -2,7 +2,7 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.save
-    redirect_to pet_path(@pet)
+    redirect_to account_path
   end
 
   private

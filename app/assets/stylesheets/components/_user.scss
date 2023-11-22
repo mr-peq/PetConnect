@@ -1,0 +1,31 @@
+.user-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #155946; /* Primary color */
+}
+
+.user-info {
+  font-size: 18px;
+  color: #6459a5; /* Tertiary color */
+}
+
+.user-rating i {
+  color: #ffc107; /* Star color */
+}
+
+.user-rating .rating-value {
+  font-size: 16px;
+  color: #30A483; /* Secondary color */
+}

@@ -1,21 +1,64 @@
 <div class="container mt-4">
-  <h1>Welcome to your dashboard</h1>
-
-  <% if current_user.profile_picture.attached? %>
-    <%= cl_image_tag(@user.profile_picture.key) %>
-  <% else %>
-    <!-- Default avatar image if no profile picture -->
-    <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Avatar" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-  <% end %>
+  <!-- User Card -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div>
+        <div class="row no-gutters align-items-center">
+          <!-- Profile Image -->
+          <div class="col-auto pl-3">
+            <% if current_user.profile_picture.attached? %>
+              <%= cl_image_tag(@user.profile_picture.key, class: 'user-avatar', height: 50) %>
+            <% else %>
+              <!-- Default avatar image if no profile picture -->
+              <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Avatar" class="user-avatar" />
+            <% end %>
+          </div>
+          <!-- Provider Info -->
+          <div class="col card user-card m-3 p-4">
+            <div>
+              <h2 class="user-name"><%= @user.first_name %> <%= @user.last_name.chars.first %>.</h2>
+              <p class="user-info"><%= @user.address %></p>
+              <!-- Ratings with FontAwesome Stars -->
+              <p>
+                <% average_rating = @user.average_rating %>
+                <% if average_rating.positive? %>
+                  <% 5.times do |i| %>
+                    <i class="fas fa-star <%= 'text-warning' if i < average_rating %>"></i>
+                  <% end %>
+                  <span>(<%= average_rating.round(1) %>)</span>
+                <% else %>
+                  <span class="text-secondary">No reviews yet</span>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <h3>My pets</h3>
-    <%= simple_form_for(@pet) do |f| %>
-      <%= f.input :name %>
-      <%= f.input :pet_category, collection: PetCategory.all %>
-      <%= f.input :photo, as: :file %>
-      <%= f.submit %>
-    <% end %>
+    <div class="add-pet" data-controller="modal">
+      <!-- Trigger/Open The Modal -->
+      <button data-action="click->modal#open" class="btn btn-primary">Add my pet</button>
 
+      <!-- The Modal -->
+      <div data-action="click@window->modal#clickOutside">
+        <!-- Modal content -->
+        <div class="modal" data-modal-target="modal">
+          <div class="modal-content">
+            <span data-action="click->modal#close" class="close">&times;</span>
+            <h3>Add a New Pet</h3>
+            <%= simple_form_for(@pet, html: { class: 'form-modal' }) do |f| %>
+              <%= f.input :name, input_html: { class: 'form-control' } %>
+              <%= f.input :pet_category_id, collection: PetCategory.all.pluck(:pet_category, :id), input_html: { class: 'form-select' } %>
+              <%= f.input :photo, as: :file, input_html: { class: 'form-control' } %>
+              <%= f.submit "Add Pet", class: "btn btn-success" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <br>
   <br>
   <br>
@@ -31,6 +74,7 @@
               <p class="card-text"><%= service.description %></p>
               <p class="card-text"><strong>Price:</strong> <%= number_to_currency(service.price, unit: '€') %></p>
               <%= link_to 'View Service', service_path(service), class: 'btn btn-primary' %>
+              <%= link_to 'Delete', service_path(service), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
             </div>
           </div>
         </div>
@@ -50,6 +94,27 @@
               <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
               <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
               <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
+              <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+    <!-- My Reviews Section -->
+  <div id="my-reviews">
+    <h3>My Reviews</h3>
+    <div class="row">
+      <% @user.reviews.each do |booking| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= booking.service.title %></h5>
+              <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
+              <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
+              <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
+              <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
             </div>
           </div>
         </div>
