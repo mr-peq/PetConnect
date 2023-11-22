@@ -1,4 +1,3 @@
-<h1>Services#index</h1>
 <div class="container" data-controller="filtered-queries">
   <div class="services-queries">
     <div class="services-query-form" >
@@ -11,35 +10,55 @@
           <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
         <% end %>
     </div>
+    <hr>
     <div class="filter-buttons-container">
-      <button class="filter-dog-button" data-action="click->filtered-queries#highlight" data-filtered-queries-dog-value="">
-        dog
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-cat-button" data-action="click->filtered-queries#highlight" data-filtered-queries-cat-value="">
-        cat
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-kangaroo-button" data-action="click->filtered-queries#highlight" data-filtered-queries-kangaroo-value="">
-        kang
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-rabbit-button" data-action="click->filtered-queries#highlight" data-filtered-queries-rabbit-value="">
-        rabbit
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-ferret-button" data-action="click->filtered-queries#highlight" data-filtered-queries-ferret-value="">
-        ferret
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-snake-button" data-action="click->filtered-queries#highlight" data-filtered-queries-snake-value="">
-        snake
-        <%# fontawesome_icon %>
-      </button>
-      <button class="filter-guinea-pig-button" data-action="click->filtered-queries#highlight" data-filtered-queries-pig-value="">
-        piggy
-        <%# fontawesome_icon %>
-      </button>
+      <div class="filter-button">
+        <button class="filter-dog-button" data-action="click->filtered-queries#highlight" data-filtered-queries-dog-value="">
+          <i class="fa-solid fa-dog"></i>
+          <p>dog</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-cat-button" data-action="click->filtered-queries#highlight" data-filtered-queries-cat-value="">
+          <i class="fa-solid fa-cat"></i>
+          <p>cat</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-kangaroo-button" data-action="click->filtered-queries#highlight" data-filtered-queries-kangaroo-value="">
+          kang
+          <%# fontawesome_icon %>
+          <p>kangaroo</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-rabbit-button" data-action="click->filtered-queries#highlight" data-filtered-queries-rabbit-value="">
+          rabbit
+          <%# fontawesome_icon %>
+          <p>rabbit</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-ferret-button" data-action="click->filtered-queries#highlight" data-filtered-queries-ferret-value="">
+          ferret
+          <%# fontawesome_icon %>
+          <p>ferret</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-snake-button" data-action="click->filtered-queries#highlight" data-filtered-queries-snake-value="">
+          snake
+          <%# fontawesome_icon %>
+          <p>snake</p>
+        </button>
+      </div>
+      <div class="filter-button">
+        <button class="filter-guinea-pig-button" data-action="click->filtered-queries#highlight" data-filtered-queries-pig-value="">
+          piggy
+          <%# fontawesome_icon %>
+          <p>guinea pig</p>
+        </button>
+      </div>
     </div>
   </div>
 
