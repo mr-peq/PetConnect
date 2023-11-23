@@ -71,3 +71,41 @@
     border-bottom-right-radius: 8px; // Rounded bottom right corner
   }
 }
+
+.booking-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.booking-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.booking-details {
+  padding: 15px;
+}
+
+.booking-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.view-icon, .delete-icon {
+  color: white;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.view-icon:hover, .delete-icon:hover {
+  opacity: 0.8;
+}
+
+/* Add more styles as per your design requirements */
