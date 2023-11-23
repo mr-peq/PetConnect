@@ -25,4 +25,20 @@ class Service < ApplicationRecord
   has_many :pet_categories, through: :service_pet_categories
   has_one_attached :service_picture
   validates :service_picture, presence: true
+
+  def average_rating
+    ratings_sum = 0
+    ratings_count = 0
+    bookings.each do |booking|
+      if booking.review
+        ratings_sum += booking.review.rating.to_f
+        ratings_count += 1
+      end
+    end
+    if ratings_count.zero?
+      0
+    else
+      ratings_sum / ratings_count
+    end
+  end
 end
