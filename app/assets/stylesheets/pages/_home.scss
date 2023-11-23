@@ -1,3 +1,16 @@
+.banner video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover; /* This will cover the area, use 'contain' to fit the whole video */
+  z-index: -1;
+}
+
 /* Specific CSS for your home-page */
 html, body {
   margin: 0;
@@ -5,6 +18,8 @@ html, body {
 }
 
 .banner {
+  position: relative;
+  overflow: hidden;
   height: 710px;
   background-size: cover;
   background-position: center;
@@ -45,4 +60,74 @@ html, body {
   border-radius: 12px;
   color: white;
   text-decoration: none;
+}
+
+// Services Section
+
+.service-item {
+  display: flex;
+  align-items: center; // Aligns icon and text vertically
+  color: white;
+  text-align: justify;
+
+  // Icon styling
+  i {
+    font-size: 1.5em; // Adjust size as needed
+    margin-right: 1em; // Adds space between icon and text
+    color: white;
+  }
+
+  // Title and description styling
+  .service-title {
+    font-weight: bold;
+    margin-bottom: 0.25em; // Small space between title and description
+    margin-right: 1rem;
+  }
+
+  .service-description {
+    margin-bottom: 0; // No extra space below description
+  }
+}
+
+.trust-box {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  h3 {
+    color: #30A483;
+    margin-bottom: 1rem;
+  }
+
+  ul.trust-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      color: #333;
+
+      i {
+        color: #30A483;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .btn {
+    background-color: #6959A5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(#6959A5, 10%);
+    }
+  }
 }

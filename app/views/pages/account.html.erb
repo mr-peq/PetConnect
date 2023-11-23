@@ -37,107 +37,139 @@
     </div>
   </div>
 
-  <h3>My pets</h3>
 
-  <% if @user.pet %>
-    <div class="card mb-3">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <% if @user.pet.pet_picture.attached? %>
-            <%= cl_image_tag(@user.pet.pet_picture.key, class: 'user-avatar', height: 50) %>
-          <% else %>
-            <img src="https://images.unsplash.com/photo-1574870111867-089730e5a72b?q=80&w=2987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Pet Image" class="card-img" />
-          <% end %>
-        </div>
-        <div class="col-md-8">
-          <div>
-            <h5 class="card-title"><%= @user.pet.name %></h5>
-            <p class="card-text"><%= @user.pet.pet_category.pet_category %></p>
+<div class="container">
+  <!-- User Card -->
+  <div class="card user-card mb-4">
+    <!-- User information goes here -->
+  </div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="my-pet-tab" data-bs-toggle="tab" data-bs-target="#my-pet" type="button" role="tab" aria-controls="my-pet" aria-selected="true">My Pet</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="my-services-tab" data-bs-toggle="tab" data-bs-target="#my-services" type="button" role="tab" aria-controls="my-services" aria-selected="false">My Services</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="my-bookings-tab" data-bs-toggle="tab" data-bs-target="#my-bookings" type="button" role="tab" aria-controls="my-bookings" aria-selected="false">My Bookings</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="my-reviews-tab" data-bs-toggle="tab" data-bs-target="#my-reviews" type="button" role="tab" aria-controls="my-reviews" aria-selected="false">My Reviews</button>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" id="accountTabsContent">
+    <div class="tab-pane fade show active" id="my-pet" role="tabpanel" aria-labelledby="my-pet-tab">
+      <!-- My Pet information goes here -->
+      <% if @user.pet %>
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <% if @user.pet.pet_picture.attached? %>
+              <%= cl_image_tag(@user.pet.pet_picture.key, class: 'user-avatar', height: 50) %>
+            <% else %>
+              <img src="https://images.unsplash.com/photo-1574870111867-089730e5a72b?q=80&w=2987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Default Pet Image" class="card-img" />
+            <% end %>
+          </div>
+          <div class="col-md-8">
+            <div>
+              <h5 class="card-title"><%= @user.pet.name %></h5>
+              <p class="card-text"><%= @user.pet.pet_category.pet_category %></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% else %>
-    <!-- Display the button to add a pet if no pet is present -->
-    <div class="add-pet" data-controller="modal">
-      <!-- Trigger/Open The Modal -->
-      <button data-action="click->modal#open" class="btn btn-primary">Add my pet</button>
-      <!-- Modal for adding pet -->
-      <div data-action="click@window->modal#clickOutside">
-        <!-- Modal content -->
-        <div class="modal" data-modal-target="modal">
-          <div class="modal-content">
-            <span data-action="click->modal#close" class="close">&times;</span>
-            <h3>Add a New Pet</h3>
-            <%= simple_form_for(@pet, html: { class: 'form-modal' }) do |f| %>
-              <%= f.error_notification %>
-              <%= f.input :name, input_html: { class: 'form-control' } %>
-              <%= f.input :pet_category_id, collection: PetCategory.all.pluck(:pet_category, :id), input_html: { class: 'form-select' } %>
-              <%= f.input :pet_picture, as: :file, input_html: { class: 'form-control' } %>
-              <%= f.submit "Add Pet", class: "btn btn-success" %>
-            <% end %>
-          </div>
-        </div>
-      </div>    </div>
-  <% end %>
-  <br>
-  <!-- My Services Section -->
-  <div id="my-services">
-    <h3>My Services</h3>
-    <div class="row">
-      <% @user.services.each do |service| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= service.title %></h5>
-              <p class="card-text"><%= service.description %></p>
-              <p class="card-text"><strong>Price:</strong> <%= number_to_currency(service.price, unit: '€') %></p>
-              <%= link_to 'View Service', service_path(service), class: 'btn btn-primary' %>
-              <%= link_to 'Delete', service_path(service), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+    <% else %>
+      <!-- Display the button to add a pet if no pet is present -->
+      <div class="add-pet" data-controller="modal">
+        <!-- Trigger/Open The Modal -->
+        <button data-action="click->modal#open" class="btn btn-primary">Add my pet</button>
+        <!-- Modal for adding pet -->
+        <div data-action="click@window->modal#clickOutside">
+          <!-- Modal content -->
+          <div class="modal" data-modal-target="modal">
+            <div class="modal-content">
+              <span data-action="click->modal#close" class="close">&times;</span>
+              <h3>Add a New Pet</h3>
+              <%= simple_form_for(@pet, html: { class: 'form-modal' }) do |f| %>
+                <%= f.error_notification %>
+                <%= f.input :name, input_html: { class: 'form-control' } %>
+                <%= f.input :pet_category_id, collection: PetCategory.all.pluck(:pet_category, :id), input_html: { class: 'form-select' } %>
+                <%= f.input :pet_picture, as: :file, input_html: { class: 'form-control' } %>
+                <%= f.submit "Add Pet", class: "btn btn-success" %>
+              <% end %>
             </div>
           </div>
-        </div>
-      <% end %>
+        </div>    </div>
+    <% end %>
     </div>
-  </div>
 
-  <!-- My Bookings Section -->
-  <div id="my-bookings">
-    <h3>My Bookings</h3>
-    <div class="row">
-      <% @user.bookings.each do |booking| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= booking.service.title %></h5>
-              <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
-              <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
-              <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
-              <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+    <div class="tab-pane fade" id="my-services" role="tabpanel" aria-labelledby="my-services-tab">
+      <!-- My Services information goes here -->
+      <div id="my-services">
+        <h3>My Services</h3>
+        <div class="row">
+          <% @user.services.each do |service| %>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= service.title %></h5>
+                  <p class="card-text"><%= service.description %></p>
+                  <p class="card-text"><strong>Price:</strong> <%= number_to_currency(service.price, unit: '€') %></p>
+                  <%= link_to 'View Service', service_path(service), class: 'btn btn-primary' %>
+                  <%= link_to 'Delete', service_path(service), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+                </div>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
 
-    <!-- My Reviews Section -->
-  <div id="my-reviews">
-    <h3>My Reviews</h3>
-    <div class="row">
-      <% @user.reviews.each do |booking| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= booking.service.title %></h5>
-              <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
-              <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
-              <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
-              <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+    <div class="tab-pane fade" id="my-bookings" role="tabpanel" aria-labelledby="my-bookings-tab">
+      <!-- My Bookings information goes here -->
+      <div id="my-bookings">
+      <div class="row">
+        <% @user.bookings.each do |booking| %>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= booking.service.title %></h5>
+                <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
+                <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
+                <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
+                <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+
+    <div class="tab-pane fade" id="my-reviews" role="tabpanel" aria-labelledby="my-reviews-tab">
+      <!-- My Reviews information goes here -->
+      <div id="my-reviews">
+      <div class="row">
+        <% @user.reviews.each do |booking| %>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= booking.service.title %></h5>
+                <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
+                <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
+                <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
+                <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
     </div>
   </div>
+</div>
 </div>

@@ -1,8 +1,12 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+<div class="banner" data-controller="video">
+  <video autoplay muted loop id="myVideo" data-target="video.source">
+    <source src="https://res.cloudinary.com/dhhdyxvne/video/upload/f_auto:video,q_auto/v1/development/u4syoxj2xhz2axgrr44o.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
   <div class="container">
     <h1><strong>Loving Pet Care in Your Neighbourhood!</strong></h1>
     <p>Book trusted sitters, dog walkers, and many more services.</p>
-    <a class="btn btn-large btn-success" href="/services">Search</a> <!-- Changed class for styling -->
+    <a class="btn btn-large btn-success" href="/services">Search</a>
   </div>
 </div>
 <br>
@@ -82,5 +86,68 @@
           </div>
         </div>
     <button data-action="click->scroll#scrollRight" class="btn-scroll">&#10095;</button> <!-- Right arrow -->
+  </div>
+</div>`
+
+<!-- Services Section -->
+<div style="background-color: #30A483; padding: 50px 0;">
+  <div class="container">
+    <h2 class="mb-4" style="color: white">Expert care for your beloved pets!</h2>
+    <br>
+    <div class="row">
+      <!-- Service List Columns -->
+      <div class="col-md-6">
+        <% services = [
+          { title: 'Boarding', description: 'Your pet stays overnight in the sitter’s home, enjoying a comfortable and family-like environment.', icon: 'fa-solid fa-suitcase' },
+          { title: 'House Sitting', description: 'A pet sitter stays at your home, ensuring your pets are cared for in their familiar surroundings.', icon: 'fa-solid fa-house' },
+          { title: 'Pet Walking', description: 'Regular walks by a professional to keep your pet fit and happy, exploring and enjoying the outdoors.', icon: 'fa-solid fa-paw' },
+          { title: 'Drop-In Visits', description: 'Quick, convenient check-ins for feeding, playtime, or a bathroom break to keep your pet comfortable during your busy day.', icon: 'fa-solid fa-building-circle-check' },
+          { title: 'Pet Grooming', description: "Expert grooming services for your pet's hygiene and appearance, including baths, haircuts, and nail trims.", icon: 'fa-solid fa-hand-sparkles' },
+          { title: 'Pet Training', description: 'Training sessions to teach obedience and good behavior, improving communication and bonding between you and your pet.', icon: 'fa-solid fa-graduation-cap' },
+          { title: 'Veterinary Services', description: 'Comprehensive medical care for your pet, from routine check-ups to treatments for health issues.', icon: 'fa-solid fa-stethoscope' },
+          { title: 'Pet Transportation', description: 'Safe and comfortable transport for your pet to appointments, ensuring they arrive on time and stress-free.', icon: 'fa-solid fa-truck-arrow-right' }
+        ] %>
+        <% services.first(4).each do |service| %>
+          <div class="service-item mb-4" style="padding-right: 40px">
+            <i class="<%= service[:icon] %>"></i>
+            <div>
+              <h5 class="service-title m-0"><%= service[:title] %></h5>
+              <p class="service-description m-0"><%= service[:description] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-6" style="padding-left: 40px">
+        <% services.last(4).each do |service| %>
+          <div class="service-item mb-4">
+            <i class="<%= service[:icon] %> fa-2x mr-3"></i>
+            <div>
+              <h5 class="service-title m-0"><%= service[:title] %></h5>
+              <p class="service-description m-0"><%= service[:description] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Trust Box -->
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center mt-5">
+        <div class="trust-box">
+          <!-- Trust box content -->
+          <h3 class="text-left p-2">
+            <i class="fa-solid fa-shield-dog" style="color: #6959A5;"></i>
+            Book with pet care provider you can trust
+          </h3>
+          <ul class="trust-list pl-0 text-left mb-4">
+            <li class="mb-2"><i class="fa fa-check mr-2" aria-hidden="true"></i>Comprehensive identity verification for every pet care provider</li>
+            <li class="mb-2"><i class="fa fa-check mr-2" aria-hidden="true"></i>Detailed profiles and personal information for all pet care experts</li>
+            <li class="mb-2"><i class="fa fa-check mr-2" aria-hidden="true"></i>Quality insurance: all providers are approved by our specialist team</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Book now</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
