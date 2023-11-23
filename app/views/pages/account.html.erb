@@ -175,15 +175,15 @@
       <!-- My Reviews information goes here -->
       <div id="my-reviews">
       <div class="row">
-        <% @user.reviews.each do |booking| %>
+        <% @user.reviews.each do |review| %>
           <div class="col-md-4 mb-3">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><%= booking.service.title %></h5>
-                <p class="card-text"><strong>Start Time:</strong> <%= booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
-                <p class="card-text"><strong>Address:</strong> <%= booking.service.address %></p>
-                <%= link_to 'View Booking', booking_path(booking), class: 'btn btn-primary' %>
-                <%= link_to 'Delete', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+                <h5 class="card-title"><%= review.booking.service.title %></h5>
+                <p class="card-text"><strong>Start Time:</strong> <%= review.booking.start_time.strftime("%B %d, %Y %H:%M") %></p>
+                <p class="card-text"><strong>Address:</strong> <%= review.booking.service.address %></p>
+                <%= link_to 'View Booking', booking_path(review.booking), class: 'btn btn-primary' %>
+                <%= link_to 'Delete', booking_path(review.booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
               </div>
             </div>
           </div>
