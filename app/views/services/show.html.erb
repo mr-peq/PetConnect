@@ -50,7 +50,7 @@
                 <%= f.input :start_time, as: :time, label: 'Choose a time', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
               </div>
             </div>
-            <%= 'Price' : @service.price %>
+            <p style="font-weight: bold; font-size: 17px"> Price: <%= @service.price %> € </p>
             <%= f.button :submit, "Book Now", class: "btn btn-primary btn-lg btn-block" %>
           <% end %>
         </div>
