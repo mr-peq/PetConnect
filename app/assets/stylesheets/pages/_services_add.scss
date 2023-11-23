@@ -37,3 +37,43 @@
   background-color: darken(#007bff, 5%);
   border-color: darken(#007bff, 5%);
 }
+
+.service-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: relative; /* Added for positioning icons */
+}
+
+.service-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px; /* adjust as needed */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.service-details {
+  padding: 15px;
+}
+
+.service-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.edit-icon, .delete-icon {
+  color: white; /* Change to your preferred icon color */
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.edit-icon:hover {
+  color: #E05901;
+}
+
+.delete-icon:hover {
+  color: #6459A5;
+}

@@ -6,9 +6,9 @@ class PagesController < ApplicationController
 
   def account
     @user = current_user
-    @pet = @user.pet
+    @pet = Pet.new
     @services = @user.services
-    @bookings = @user.bookings
+    @bookings = Booking.where(user_id: current_user.id)
     @reviews = @user.reviews
   end
 end
