@@ -29,6 +29,12 @@ class ServicesController < ApplicationController
   end
 
   def show
+    @markers = Service.where(id: params[:id]).geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude
+      }
+    end
   end
 
   def new
