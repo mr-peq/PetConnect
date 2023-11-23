@@ -2,9 +2,12 @@
 <% services.each do |service| %>
   <div class="col">
     <div class="card" style="position: relative;">
+    <!--
       <% service.user.photos.each do |photo| %>
         <%= cl_image_tag photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
       <% end %>
+     -->
+      <%= cl_image_tag service.photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
       <div class="card-body">
         <div class="card-title-and-tags">
           <h5 class="card-title" style="margin-bottom: 0;"><%= service.title.capitalize %></h5>
