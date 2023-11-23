@@ -71,6 +71,10 @@
   }
 }
 
+.btn-selected img {
+  filter: opacity(100%);
+}
+
 .services-content-container {
   display: grid;
   grid-template-columns: 2fr 1fr;

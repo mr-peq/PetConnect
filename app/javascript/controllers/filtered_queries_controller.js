@@ -7,17 +7,16 @@ export default class extends Controller {
     console.log("Logged");
     const index = window.location.toLocaleString().search(/filters/)
     const filters = window.location.toLocaleString().slice(index + "filters=".length).split(',')
-    console.log(filters);
-    // console.log(this.DogTarget);
-    // console.log(this.constructor.targets);
-    // console.log(this[`${filters[0]}Target`]);
-    // console.log(this[`${filters[1]}Target`]);
+    // console.log(filters);
+
     filters.forEach((animal) => {
-      this[`${animal}Target`].classList.add('btn-selected')
-    })
-    this.constructor.targets.forEach((btn) => {
-      // if()
-    })
+      console.log(this[`${animal}Target`]);
+      this[`${animal}Target`].classList.add('btn-selected');
+      const animalLowerCase = animal.charAt(0).toLowerCase() + animal.slice(1);
+      console.log(animalLowerCase);
+      this[`${animalLowerCase}Value`] = animal
+      // console.log(this[`${animal}Target`]);
+    });
   }
 
   static targets = [
@@ -38,7 +37,7 @@ export default class extends Controller {
     rabbit: String,
     ferret: String,
     snake: String,
-    pig: String
+    guineaPig: String
   }
 
   filter(e) {
@@ -47,7 +46,9 @@ export default class extends Controller {
 
     const pet_categories = ['Dog', 'Cat', 'Kangaroo', 'Rabbit', 'Ferret', 'Snake', 'Guinea Pig']
     const query = this.queryTarget.firstElementChild.value
+    console.log(Object.values(this.element.dataset));
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
+    console.log(filtersArray);
 
     const url = `/services?query=${query}&filters=${filtersArray}`
     Turbo.visit(url)
@@ -101,10 +102,10 @@ export default class extends Controller {
       }
     }
     else if (btn.classList.contains('filter-guinea-pig-button')) {
-      if (this.pigValue == "") {
-        this.pigValue = "GuineaPig";
+      if (this.guineaPigValue == "") {
+        this.guineaPigValue = "GuineaPig";
       } else {
-        this.pigValue = "";
+        this.guineaPigValue = "";
       }
     }
   }
