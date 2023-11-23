@@ -7,6 +7,7 @@ Booking.destroy_all
 Service.destroy_all
 User.destroy_all
 Pet.destroy_all
+PetCategory.destroy_all
 
 pet_categories.each do |pet_category|
   PetCategory.create!(pet_category: pet_category)
