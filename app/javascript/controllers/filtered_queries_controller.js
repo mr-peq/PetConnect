@@ -5,9 +5,32 @@ import { Turbo } from "@hotwired/turbo-rails"
 export default class extends Controller {
   connect() {
     console.log("Logged");
+    const index = window.location.toLocaleString().search(/filters/)
+    const filters = window.location.toLocaleString().slice(index + "filters=".length).split(',')
+    console.log(filters);
+    // console.log(this.DogTarget);
+    // console.log(this.constructor.targets);
+    // console.log(this[`${filters[0]}Target`]);
+    // console.log(this[`${filters[1]}Target`]);
+    filters.forEach((animal) => {
+      this[`${animal}Target`].classList.add('btn-selected')
+    })
+    this.constructor.targets.forEach((btn) => {
+      // if()
+    })
   }
 
-  static targets = ["query", "services"]
+  static targets = [
+    "query",
+    "services",
+    "Dog",
+    "Cat",
+    "Ferret",
+    "Kangaroo",
+    "Rabbit",
+    "Snake",
+    "GuineaPig"
+  ]
   static values = {
     dog: String,
     cat: String,
@@ -26,19 +49,7 @@ export default class extends Controller {
     const query = this.queryTarget.firstElementChild.value
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
 
-    // console.log(filtersArray);
-    // console.log(query);
-
-    // if (filtersArray.length === 0 && query !== "") {
-    //   const defaultUrl = '/services'
-    //   fetch(defaultUrlurl,  {
-    //     method: "GET",
-
-    //   })
-    // }
-
     const url = `/services?query=${query}&filters=${filtersArray}`
-    console.log(url);
     Turbo.visit(url)
   }
 
@@ -91,7 +102,7 @@ export default class extends Controller {
     }
     else if (btn.classList.contains('filter-guinea-pig-button')) {
       if (this.pigValue == "") {
-        this.pigValue = "Guinea Pig";
+        this.pigValue = "GuineaPig";
       } else {
         this.pigValue = "";
       }

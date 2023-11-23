@@ -131,3 +131,11 @@ html, body {
     }
   }
 }
+
+.link-to-filtered-services {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  right: 10px;
+  z-index: 1000;
+}
