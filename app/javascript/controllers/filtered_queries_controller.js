@@ -5,9 +5,31 @@ import { Turbo } from "@hotwired/turbo-rails"
 export default class extends Controller {
   connect() {
     console.log("Logged");
+    const index = window.location.toLocaleString().search(/filters/)
+    const filters = window.location.toLocaleString().slice(index + "filters=".length).split(',')
+    // console.log(filters);
+
+    filters.forEach((animal) => {
+      console.log(this[`${animal}Target`]);
+      this[`${animal}Target`].classList.add('btn-selected');
+      const animalLowerCase = animal.charAt(0).toLowerCase() + animal.slice(1);
+      console.log(animalLowerCase);
+      this[`${animalLowerCase}Value`] = animal
+      // console.log(this[`${animal}Target`]);
+    });
   }
 
-  static targets = ["query", "services"]
+  static targets = [
+    "query",
+    "services",
+    "Dog",
+    "Cat",
+    "Ferret",
+    "Kangaroo",
+    "Rabbit",
+    "Snake",
+    "GuineaPig"
+  ]
   static values = {
     dog: String,
     cat: String,
@@ -15,7 +37,7 @@ export default class extends Controller {
     rabbit: String,
     ferret: String,
     snake: String,
-    pig: String
+    guineaPig: String
   }
 
   filter(e) {
@@ -24,21 +46,11 @@ export default class extends Controller {
 
     const pet_categories = ['Dog', 'Cat', 'Kangaroo', 'Rabbit', 'Ferret', 'Snake', 'Guinea Pig']
     const query = this.queryTarget.firstElementChild.value
+    console.log(Object.values(this.element.dataset));
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
-
-    // console.log(filtersArray);
-    // console.log(query);
-
-    // if (filtersArray.length === 0 && query !== "") {
-    //   const defaultUrl = '/services'
-    //   fetch(defaultUrlurl,  {
-    //     method: "GET",
-
-    //   })
-    // }
+    console.log(filtersArray);
 
     const url = `/services?query=${query}&filters=${filtersArray}`
-    console.log(url);
     Turbo.visit(url)
   }
 
@@ -90,10 +102,10 @@ export default class extends Controller {
       }
     }
     else if (btn.classList.contains('filter-guinea-pig-button')) {
-      if (this.pigValue == "") {
-        this.pigValue = "Guinea Pig";
+      if (this.guineaPigValue == "") {
+        this.guineaPigValue = "GuineaPig";
       } else {
-        this.pigValue = "";
+        this.guineaPigValue = "";
       }
     }
   }

@@ -83,3 +83,4 @@ gem "faker"
 gem "dotenv-rails"
 gem 'pg_search'
 gem "geocoder"
+gem "active_storage_validations"
