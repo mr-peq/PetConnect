@@ -54,10 +54,6 @@
 .icon {
   height: 35px;
   filter: opacity(50%);
-
-  // &:hover {
-  //   filter: opacity(100%);
-  // }
 }
 
 .btn-selected {
@@ -102,14 +98,6 @@
   margin-bottom: .3em;
 }
 
-// .tag-icon {
-//   border: 1px solid black;
-//   border-radius: 50%;
-//   width: 25px;
-//   height: 25px;
-//   text-align: center;
-// }
-
 .icon-tag {
   // green
   // filter: invert(53%) sepia(57%) saturate(481%) hue-rotate(112deg) brightness(91%) contrast(85%);
@@ -117,6 +105,10 @@
   // filter: invert(34%) sepia(76%) saturate(1473%) hue-rotate(2deg) brightness(97%) contrast(100%);
   // purple
   filter: invert(37%) sepia(19%) saturate(1346%) hue-rotate(212deg) brightness(100%) contrast(86%);
+}
+
+.list-inline-item:not(:last-child) {
+  margin-right: 0.2rem;
 }
 
 .card-price-and-details-btn {
@@ -133,5 +125,9 @@
 
   .custom-map {
     margin-top: 2em;
+  }
+
+  .filter-button p {
+    display: none;
   }
 }
