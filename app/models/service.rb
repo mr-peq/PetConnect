@@ -24,4 +24,5 @@ class Service < ApplicationRecord
   has_many :service_pet_categories, dependent: :destroy
   has_many :pet_categories, through: :service_pet_categories
   has_one_attached :service_picture
+  validates :service_picture, presence: true
 end
