@@ -7,6 +7,7 @@ Booking.destroy_all
 Service.destroy_all
 User.destroy_all
 Pet.destroy_all
+PetCategory.destroy_all
 
 pet_categories.each do |pet_category|
   PetCategory.create!(pet_category: pet_category)
@@ -50,11 +51,12 @@ i = 0
 6.times do
   address = addresses[i]
   i += 1
-  service = Service.create!(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: address)
-  ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
-  ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
+  service = Service.new(title: services.sample, description: (Faker::Lorem.words(number: 40)).join(' '), price: rand(10..50).to_f, availabilities: "monday: 9AM - 6PM, tuesday: 9AM - 6PM, wednesday: 9AM - 6PM, thursday: 9AM - 6PM, friday: 9AM - 6PM", user: User.where(provider: true).sample, address: address)
 
   service.service_picture.attach(io: File.open("#{Rails.root}/app/assets/images/service-photo.jpg"), filename: 'service-photo.jpg')
+  service.save
+  ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
+  ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
 end
 
 puts "Creating 10 new bookings..."
