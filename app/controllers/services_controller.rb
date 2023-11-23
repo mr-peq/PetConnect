@@ -51,7 +51,7 @@ class ServicesController < ApplicationController
   def update
     # Routes à updater
     if @service.update(service_params)
-      redirect_to service_path(@service), notice: 'service was successfully updated.'
+      redirect_to account_path, notice: 'Service was successfully updated.'
     else
       render :edit
     end
@@ -59,7 +59,7 @@ class ServicesController < ApplicationController
 
   def destroy
     @service.destroy
-    redirect_to account_path, notice: 'service was successfully deleted.'
+    redirect_to account_path, notice: 'Service was successfully deleted.'
   end
 
   private

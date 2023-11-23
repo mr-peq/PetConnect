@@ -64,7 +64,7 @@
   display: flex;
 }
 
-.edit-icon, .delete-icon {
+.edit-icon, .delete-icon, .view-icon {
   color: white; /* Change to your preferred icon color */
   margin-left: 10px;
   font-size: 1.5rem;
@@ -76,4 +76,8 @@
 
 .delete-icon:hover {
   color: #6459A5;
+}
+
+.view-icon:hover {
+  color: #155946;
 }

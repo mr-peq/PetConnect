@@ -32,9 +32,9 @@
           </div>
         </div>
         <h5 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name}" %></h5>
-        <p class="card-text"><%= service.address %></p>
+        <p class="card-text"><%= service.user.address %></p>
         <div class="card-price-and-details-btn">
-          <b class="card-service-price"><%= service.price %>€</b>
+          <b class="card-service-price"><%= service.price %> €</b>
           <%= link_to "see details", service_path(service), class: "btn btn-primary"%>
         </div>
       </div>

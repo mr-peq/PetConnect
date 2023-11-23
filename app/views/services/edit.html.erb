@@ -1,10 +1,26 @@
-<%# to do : partial with the new_form %>
-
-<%= simple_form_for(@service) do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <%= f.input :availabilities %>
-  <%= f.input :address %>
-  <%= f.submit %>
-<% end %>
+<div class="service-form-container my-5">
+  <h2 class="text-center mb-4">Update your service!</h2>
+  <%= simple_form_for(@service, html: { class: 'form-service' }) do |f| %>
+    <div class="form-group">
+      <%= f.input :title, collection: ['Boarding', 'House Sitting', 'Pet Walking', 'Drop-In Visits', 'Pet Grooming', 'Pet Training', 'Veterinary Services', 'Pet Transportation'], prompt: "Select a Service", input_html: { class: 'form-select' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :description, as: :text, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :pet_category_ids, collection: PetCategory.all, as: :check_boxes, label_method: :pet_category, value_method: :id, label_html: { class: 'form-label' }, input_html: { multiple: true, class: 'form-check-input' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :price, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :availabilities, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :service_picture, as: :file, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+    </div>
+    <div class="form-group">
+      <%= f.button :submit, "Update Service", class: "btn btn-primary btn-block" %>
+    </div>
+  <% end %>
+</div>
