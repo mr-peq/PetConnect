@@ -6,7 +6,9 @@ class PagesController < ApplicationController
 
   def account
     @user = current_user
-    @pet = Pet.new
+    @pet = @user.pet
+    @services = @user.services
+    @bookings = @user.bookings
+    @reviews = @user.reviews
   end
-
 end
