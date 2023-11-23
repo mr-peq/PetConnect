@@ -114,3 +114,14 @@
   align-items: center;
   justify-content: space-between;
 }
+
+
+@media (max-width: 800px) {
+  .services-content-container {
+    display: block;
+  }
+
+  .custom-map {
+    margin-top: 2em;
+  }
+}

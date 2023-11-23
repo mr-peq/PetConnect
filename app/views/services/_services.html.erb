@@ -2,11 +2,6 @@
 <% services.each do |service| %>
   <div class="col">
     <div class="card" style="position: relative;">
-    <!--
-      <% service.user.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
-      <% end %>
-     -->
       <%= cl_image_tag service.photo.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
       <div class="card-body">
         <div class="card-title-and-tags">
@@ -16,11 +11,6 @@
             <p><%= pet_category.pet_category %></p>
           <% end %>
           </div>
-
-          <%# <ul class="list-inline">
-            <li class="list-inline-item tag-icon"><i class="fa-solid fa-dog"></i></li>
-            <li class="list-inline-item tag-icon"><i class="fa-solid fa-cat"></i></li>
-          </ul> %>
         </div>
         <h5 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name}" %></h5>
         <p class="card-text"><%= service.address %></p>
@@ -33,7 +23,8 @@
   </div>
 <% end %>
 </div>
-<div style="width: 100%; height: 600px;"
+<div style="width: 100%; height: 800px; position: sticky; top: 10px;"
+      class="custom-map"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
