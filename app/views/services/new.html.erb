@@ -9,10 +9,16 @@
       <%= f.input :description, as: :text, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
     </div>
     <div class="form-group">
+      <%= f.input :pet_category_ids, collection: PetCategory.all, as: :check_boxes, label_method: :pet_category, value_method: :id, label_html: { class: 'form-label' }, input_html: { multiple: true, class: 'form-check-input' } %>
+    </div>
+    <div class="form-group">
       <%= f.input :price, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
     </div>
     <div class="form-group">
       <%= f.input :availabilities, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :service_picture, as: :file, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
     </div>
     <div class="form-group">
       <%= f.button :submit, "Add Service", class: "btn btn-primary btn-block" %>
