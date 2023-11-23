@@ -54,7 +54,7 @@ i = 0
   ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
   ServicePetCategory.create!(pet_category: PetCategory.all.sample, service: service)
 
-  service.photo.attach(io: File.open("#{Rails.root}/app/assets/images/service-photo.jpg"), filename: 'service-photo.jpg')
+  service.service_picture.attach(io: File.open("#{Rails.root}/app/assets/images/service-photo.jpg"), filename: 'service-photo.jpg')
 end
 
 puts "Creating 10 new bookings..."
