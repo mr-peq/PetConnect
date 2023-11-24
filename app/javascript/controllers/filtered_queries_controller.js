@@ -46,11 +46,13 @@ export default class extends Controller {
 
     const pet_categories = ['Dog', 'Cat', 'Kangaroo', 'Rabbit', 'Ferret', 'Snake', 'Guinea Pig']
     const query = this.queryTarget.firstElementChild.value
-    console.log(Object.values(this.element.dataset));
+    // console.log(Object.values(this.element.dataset));
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
-    console.log(filtersArray);
+    // console.log(filtersArray);
+    const minPrice = document.querySelector('.noUi-handle.noUi-handle-lower').getAttribute('aria-valuetext');
+    const maxPrice = document.querySelector('.noUi-handle.noUi-handle-upper').getAttribute('aria-valuetext');
 
-    const url = `/services?query=${query}&filters=${filtersArray}`
+    const url = `/services?query=${query}&filters=${filtersArray}&min_price=${minPrice}&max_price=${maxPrice}`
     Turbo.visit(url)
   }
 
