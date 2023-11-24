@@ -15,13 +15,20 @@ class BookingsController < ApplicationController
   def create
     @booking = @service.bookings.new(booking_params)
     @booking.user = current_user
-    # Set the end_time to be one hour after the start_time
-    combined_start_time = DateTime.parse("#{params[:booking][:date]} #{params[:booking][:start_time]}")
+
+    # Debugging
+    puts "Date: #{params[:booking][:date]}, Hour: #{params[:booking]["start_time(4i)"]}, Minutes: #{params[:booking]["start_time(5i)"]}"
+
+    # Combine date and time correctly
+    date_string = "#{params[:booking][:date]} #{params[:booking]["start_time(4i)"]}:#{params[:booking]["start_time(5i)"]}"
+    combined_start_time = DateTime.parse(date_string)
+
+    # Set the start and end times
     @booking.start_time = combined_start_time
     @booking.end_time = combined_start_time + 1.hour
 
     if @booking.save
-      redirect_to service_path(@service), notice: 'Booking was successfully created.'
+      redirect_to account_path, notice: 'Booking was successfully created.'
     else
       render 'services/show', status: :unprocessable_entity
     end

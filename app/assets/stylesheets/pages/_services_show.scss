@@ -21,3 +21,45 @@ a:hover {
     font-size: 1.2em;
   }
 }
+
+.service-picture {
+  text-align: center;
+}
+
+.service-picture img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.review-card {
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.review-card:last-child {
+  border-bottom: none;
+}
+
+.service-provider-avatar {
+  border-radius: 50%;
+}
+
+.card-title-and-description, .card-rating {
+  margin-bottom: 15px;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.btn-lg {
+  padding: 10px 20px;
+}
