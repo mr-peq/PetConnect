@@ -7,15 +7,12 @@ export default class extends Controller {
     console.log("Logged");
     const index = window.location.toLocaleString().search(/filters/)
     const filters = window.location.toLocaleString().slice(index + "filters=".length).split(',')
-    // console.log(filters);
 
     filters.forEach((animal) => {
-      console.log(this[`${animal}Target`]);
       this[`${animal}Target`].classList.add('btn-selected');
       const animalLowerCase = animal.charAt(0).toLowerCase() + animal.slice(1);
       console.log(animalLowerCase);
       this[`${animalLowerCase}Value`] = animal
-      // console.log(this[`${animal}Target`]);
     });
   }
 
@@ -52,7 +49,7 @@ export default class extends Controller {
     const minPrice = document.querySelector('.noUi-handle.noUi-handle-lower').getAttribute('aria-valuetext');
     const maxPrice = document.querySelector('.noUi-handle.noUi-handle-upper').getAttribute('aria-valuetext');
 
-    const url = `/services?query=${query}&filters=${filtersArray}&min_price=${minPrice}&max_price=${maxPrice}`
+    const url = `/services?query=${query}&min_price=${minPrice}&max_price=${maxPrice}&filters=${filtersArray}`
     Turbo.visit(url)
   }
 

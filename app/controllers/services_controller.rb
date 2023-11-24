@@ -20,17 +20,17 @@ class ServicesController < ApplicationController
         @services = @services.where(id: services_ids.flatten)
       end
     end
-    @markers = @services.geocoded.map do |service|
-      {
-        lat: service.latitude,
-        lng: service.longitude
-      }
-    end
 
     @max_price = Service.maximum(:price)
 
     if params[:min_price].present? && params[:max_price].present?
       @services = @services.where(price: params[:min_price]..params[:max_price])
+    end
+    @markers = @services.geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude
+      }
     end
   end
 
