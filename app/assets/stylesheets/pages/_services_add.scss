@@ -64,7 +64,7 @@
   display: flex;
 }
 
-.edit-icon, .delete-icon {
+.edit-icon, .edit-icon-user, .delete-icon, .view-icon {
   color: white; /* Change to your preferred icon color */
   margin-left: 10px;
   font-size: 1.5rem;
@@ -76,4 +76,26 @@
 
 .delete-icon:hover {
   color: #6459A5;
+}
+
+.view-icon:hover {
+  color: #155946;
+}
+
+.user-card-container:hover .edit-icon-user {
+  display: block;
+  color: #E05901;
+}
+
+.user-card-container {
+  position: relative;
+}
+
+.edit-icon-user {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  font-size: 20px; /* Adjust as needed */
+  color: #155946; /* Adjust the color as needed */
+  display: none;
 }

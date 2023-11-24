@@ -1,6 +1,6 @@
 <div class="container mt-4">
 <!-- User Card -->
-<div class="mb-4 d-flex align-items-center">
+<div class="mb-4 d-flex align-items-center user-card-container">
   <!-- Profile Image -->
   <div class="profile-picture mr-4" style="margin-right: 30px">
     <% if current_user.profile_picture.attached? %>
@@ -15,6 +15,9 @@
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <!-- User Info Section -->
+        <%= link_to edit_user_registration_path(@user), class: 'edit-icon-user' do %>
+          <i class="fa-regular fa-pen-to-square"></i>
+        <% end %>
         <div>
           <h2 class="user-name mb-2"><%= @user.first_name %> <%= @user.last_name %></h2>
           <p class="user-info mb-2"><%= @user.address %></p>
@@ -52,18 +55,18 @@
 
 <div class="container">
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+  <ul class="nav nav-tabs" id="accountTabs" role="tablist" data-controller="tab">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active user-info mb-2" id="my-pet-tab" data-bs-toggle="tab" data-bs-target="#my-pet" type="button" role="tab" aria-controls="my-pet" aria-selected="true">My Pet</button>
+      <button class="nav-link active user-info mb-2" id="my-pet-tab" data-bs-toggle="tab" data-bs-target="#my-pet" type="button" role="tab" aria-controls="my-pet" aria-selected="true" data-tab-target="tab">My Pet</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link user-info mb-2" id="my-services-tab" data-bs-toggle="tab" data-bs-target="#my-services" type="button" role="tab" aria-controls="my-services" aria-selected="false">My Services</button>
+      <button class="nav-link user-info mb-2" id="my-services-tab" data-bs-toggle="tab" data-bs-target="#my-services" type="button" role="tab" aria-controls="my-services" aria-selected="false" data-tab-target="tab">My Services</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link user-info mb-2" id="my-bookings-tab" data-bs-toggle="tab" data-bs-target="#my-bookings" type="button" role="tab" aria-controls="my-bookings" aria-selected="false">My Bookings</button>
+      <button class="nav-link user-info mb-2" id="my-bookings-tab" data-bs-toggle="tab" data-bs-target="#my-bookings" type="button" role="tab" aria-controls="my-bookings" aria-selected="false" data-tab-target="tab">My Bookings</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link user-info mb-2" id="my-reviews-tab" data-bs-toggle="tab" data-bs-target="#my-reviews" type="button" role="tab" aria-controls="my-reviews" aria-selected="false">My Reviews</button>
+      <button class="nav-link user-info mb-2" id="my-reviews-tab" data-bs-toggle="tab" data-bs-target="#my-reviews" type="button" role="tab" aria-controls="my-reviews" aria-selected="false" data-tab-target="tab">My Reviews</button>
     </li>
   </ul>
 
@@ -115,47 +118,78 @@
     <% end %>
     </div>
 
-  <div class="tab-pane fade" id="my-services" role="tabpanel" aria-labelledby="my-services-tab">
-    <!-- My Services information goes here -->
-    <div id="my-services">
-      <div class="row mt-4">
-        <!-- Trigger/Open The Modal -->
-        <button class="btn btn-primary mb-4">Add a service</button>
-        <% @user.services.each do |service| %>
-          <div class="col-md-4 mb-3">
-            <div class="service-card">
-              <div class="service-image" style="background-image: url('<%= url_for(service.service_picture) %>');">
-                <div class="service-icons">
-                  <%= link_to edit_service_path(service), class: 'edit-icon' do %>
-                    <i class="fa-regular fa-pen-to-square"></i>
-                  <% end %>
-                  <%= link_to service_path(service), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-icon' do %>
-                    <i class="fa-regular fa-circle-xmark"></i>
-                  <% end %>
+    <div class="tab-pane fade" role="tabpanel" aria-labelledby="my-services-tab">
+      <!-- My Services information goes here -->
+      <div id="my-services">
+        <div class="row mt-4">
+          <!-- Add Service Button -->
+          <%= link_to 'Add a service', new_service_path, class: 'btn btn-primary mb-4' %>
+        </div>
+
+        <div class="row">
+          <% @services.each do |service| %>
+            <div class="col-md-4 mb-3">
+              <div class="card" style="position: relative;">
+                <%= cl_image_tag service.service_picture.key, background: 'black', aspect_ratio: '2.0', crop: :crop, class: "card-service-provider-image" %>
+                <div class="card-body">
+                  <div class="service-icons">
+                    <%= link_to service_path(service), class: 'view-icon' do %>
+                      <i class="fa-regular fa-eye"></i>
+                    <% end %>
+                    <%= link_to edit_service_path(service), class: 'edit-icon' do %>
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    <% end %>
+                    <%= link_to service_path(service), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'delete-icon' do %>
+                      <i class="fa-regular fa-circle-xmark"></i>
+                    <% end %>
+                  </div>
+                  <div class="card-title-and-tags">
+                    <div class="card-title-and-rating">
+                      <h5 class="card-title" style="margin-bottom: 0;"><%= service.title %></h5>
+                      <div style="font-size: 0.8em;">
+                        <%# Rating display logic %>
+                        <% if service.bookings.count.positive? %>
+                          <% average_rating = service.average_rating %>
+                          <% 5.times do |i| %>
+                            <i class="fas fa-star <%= 'text-warning' if i < average_rating %>"></i>
+                          <% end %>
+                          <span>(<%= average_rating.round(1) %>)</span>
+                        <% else %>
+                          <p>No reviews yet.</p>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="pet_categories">
+                      <ul class="list-inline">
+                        <% service.pet_categories.each do |pet_category| %>
+                          <li class="list-inline-item">
+                            <% pet = pet_category.pet_category.downcase.gsub(' ', '-') %>
+                            <%= image_tag "icons/#{pet}.svg", class: "icon icon-tag" %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                  <h5 class="card-service-provider"><%= "#{service.user.first_name} #{service.user.last_name.chars.first}." %></h5>
+                  <p class="card-text"><%= service.address %></p>
+                  <div class="card-price-and-details-btn">
+                    <b class="card-service-price"><%= service.price %> €</b>
+                  </div>
                 </div>
               </div>
-              <div class="service-details">
-                <h5 class="service-title"><%= service.title %></h5>
-                <p class="service-categories">
-                  <%= service.pet_categories.pluck(:pet_category).join(', ') %>
-                </p>
-                <p class="service-description"><%= service.description %></p>
-                <p class="service-price"><%= number_to_currency(service.price) %>€</p>
-              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
+
 
 
     <div class="tab-pane fade" id="my-bookings" role="tabpanel" aria-labelledby="my-bookings-tab">
       <!-- My Bookings information goes here -->
       <div id="my-bookings-content">
         <div class="row mt-4">
-        <!-- Trigger/Open The Modal -->
-        <button class="btn btn-primary mb-4">Book now</button>
+        <%= link_to 'Book now', services_path, class: 'btn btn-primary mb-4' %>
             <% @bookings.each do |booking| %>
             <div class="col-md-4 mb-3">
               <div class="booking-card">
@@ -165,7 +199,7 @@
                     <%= link_to edit_booking_path(booking), class: 'edit-icon' do %>
                       <i class="fa-regular fa-pen-to-square"></i>
                     <% end %>
-                    <%= link_to booking_path(booking), class: 'delete-icon' do %>
+                    <%= link_to booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'delete-icon' do %>
                       <i class="fa-regular fa-circle-xmark"></i>
                     <% end %>
                   </div>
@@ -189,25 +223,36 @@
       <!-- My Reviews information goes here -->
       <div id="my-reviews-content">
         <div class="row mt-4">
-          <% @services.each do |service| %>
+          <% @user.services.each do |service| %>
             <% service.bookings.each do |booking| %>
               <% if booking.review.present? %>
                 <div class="col-md-4 mb-3">
                   <div class="review-card">
-                    <div class="review-details">
-                      <p class="reviewer-name">
+                    <div class="reviewer-info">
+                      <% if booking.user.profile_picture.attached? %>
+                        <%= cl_image_tag(booking.user.profile_picture.key, class: 'reviewer-avatar', height: 40, width: 40, crop: :fill) %>
+                      <% else %>
+                        <img src="default-avatar-url.jpg" alt="Default Avatar" class="reviewer-avatar" />
+                      <% end %>
+                      <p class="reviewer-name" style="color:#155946">
                         <%= booking.user.first_name %> <%= booking.user.last_name.chars.first %>.
                       </p>
-                      <p class="review-rating">
-                        <% rating = booking.review.rating %>
-                        <% 5.times do |i| %>
-                          <i class="fas fa-star <%= 'text-warning' if i < rating %>"></i>
-                        <% end %>
-                      </p>
-                      <p class="review-comment">
-                        <%= booking.review.description %>
+                      <p class="review-timestamp">
+                        <%= distance_of_time_in_words(booking.review.created_at, Time.now) %> ago
                       </p>
                     </div>
+                    <div class="review-rating pt-2">
+                      <% rating = booking.review.rating %>
+                      <% 5.times do |i| %>
+                        <i class="fas fa-star <%= 'text-warning' if i < rating %>"></i>
+                      <% end %>
+                    </div>
+                    <p class="review-comment">
+                      <%= booking.review.description %>
+                    </p>
+                    <p class="review-service" style="color:#6459a5">
+                      Service: <%= booking.service.title %>
+                    </p>
                   </div>
                 </div>
               <% end %>
@@ -216,6 +261,7 @@
         </div>
       </div>
     </div>
+
 
 
   </div>

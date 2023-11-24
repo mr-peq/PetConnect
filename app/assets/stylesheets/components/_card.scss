@@ -108,6 +108,35 @@
   opacity: 0.8;
 }
 
+.review-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  padding: 15px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reviewer-avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review-timestamp {
+  font-size: 0.8em;
+  color: grey;
+  margin-left: auto; /* Push to the right */
+}
+
+.review-comment {
+  font-style: italic;
+  color: grey;
+}
+
 .card-custom {
   background: white;
   padding: 2em;
@@ -118,3 +147,4 @@
 }
 
 /* Add more styles as per your design requirements */
+
