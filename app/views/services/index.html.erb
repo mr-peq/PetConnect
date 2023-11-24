@@ -2,14 +2,18 @@
   <div class="services-queries">
     <div class="services-query-form" >
       <%= form_with url: services_path, method: :get, data: { filtered_queries_target: "query", action: "submit->filtered-queries#filter" }, class: "d-flex query-form" do %>
+        <div style="width: 100%; display: flex; justify-content: space-between; position: relative;">
           <%= text_field_tag :query,
                 params[:query],
                 class: "form-control",
                 placeholder: "Search a type of service, a name, an address... ",
-                style: "background-color: white;"
+                style: "background-color: white; width: 45%;"
             %>
-          <p class="text-secondary mb-0">Price range</p>
-          <div id="slider" data-controller="slider" style="align-self: center; width: 95%;"></div>
+          <div class="slider-container">
+            <p class="text-secondary mb-0">Price range</p>
+            <div id="slider" data-controller="slider" style="align-self: center; width: 95%;"></div>
+          </div>
+        </div>
           <%= submit_tag "Apply filters", name: "", class: "btn btn-primary", style: "width: 200px;" %>
         <% end %>
     </div>

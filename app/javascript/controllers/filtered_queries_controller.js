@@ -45,7 +45,7 @@ export default class extends Controller {
     console.log('Reached filter successfully');
 
     const pet_categories = ['Dog', 'Cat', 'Kangaroo', 'Rabbit', 'Ferret', 'Snake', 'Guinea Pig']
-    const query = this.queryTarget.firstElementChild.value
+    const query = this.queryTarget.firstElementChild.firstElementChild.value
     // console.log(Object.values(this.element.dataset));
     const filtersArray = Object.values(this.element.dataset).filter((value) => pet_categories.includes(value))
     // console.log(filtersArray);
