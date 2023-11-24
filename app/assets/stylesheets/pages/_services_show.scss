@@ -1,9 +1,23 @@
-  a {
-    text-decoration: none;
-    color: black
-  }
+a {
+  text-decoration: none;
+  color: black
+}
 
-  a:hover {
-    text-decoration: underline;
-    color: black
+a:hover {
+  text-decoration: underline;
+  color: black
+}
+
+.review {
+  margin-block: 0.6em;
+}
+
+.review-user {
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+    margin-left: 0.6em;
+    font-size: 1.2em;
   }
+}
