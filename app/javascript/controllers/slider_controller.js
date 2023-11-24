@@ -30,11 +30,11 @@ export default class extends Controller {
       },
     });
 
+    
     slider.noUiSlider.on('update', (values, handle) => {
       const [min, max] = values;
       console.log(values);
-      // document.getElementById('min_price').value = min;
-      // document.getElementById('max_price').value = max;
     });
+
   }
 }
