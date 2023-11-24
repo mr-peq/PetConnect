@@ -1,142 +1,97 @@
 <div class="container mt-4">
-  <!-- Pet Care Provider Card -->
-
-  <div class="row card-custom mb-4">
-    <!-- Profile Image -->
-    <div class="col-md-2 d-flex">
-      <% if current_user.profile_picture.attached? %>
-          <%= cl_image_tag(current_user.profile_picture.key, class: "avatar-big") %>
-        <% else %>
-          <!-- Default avatar image if no profile picture -->
-          <img src="https://images.unsplash.com/photo-1529946825183-536c6317f60e?q=80&w=3163&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="avatar-big" />
-        <% end %>
-    </div>
-    <!-- Provider Info -->
-    <div class="col-md-8">
-      <div class="card-body" style="border-radius: 15px">
-        <h2 class="mb-0"><%= @service.user.first_name %> <%= @service.user.last_name.chars.first %>.</h2>
-        <p class="text-secondary"><%= @service.address %></p>
-    <!-- Ratings with FontAwesome Stars -->
-    <p>
-      <% if @service.bookings.count.positive? %>
-          <% average_rating = @service.average_rating %>
-          <% 5.times do |i| %>
-            <i class="fas fa-star <%= 'text-warning' if i < average_rating %>"></i>
-          <% end %>
-          <span>(<%= average_rating.round(1) %>)</span>
-        <% else %>
-          <p class="text-secondary">No reviews yet.</p>
-        <% end %>
-    </p>
-    <!-- Contact Button -->
-    <a href="#" class="btn btn-primary">Contact <%= @service.user.first_name %></a>
-      </div>
-    </div>
+  <!-- Service Picture -->
+  <div class="service-picture mb-4">
+    <%= cl_image_tag(@service.service_picture.key, width: 1400, height: 400, crop: :fill, class: "img-fluid") %>
   </div>
 
-  <div class="d-flex">
-  <!-- sticky Section -->
-
-    <div style="display: flex; flex-direction: column; width: 100%;">
-    <!-- BOOKING FORM -->
-      <div class="mb-4 card" style="padding: 1em; background-color: #e8d2a9a3; border: 3px solid #e9fdfd;">
-        <h5 class="card-title">Book <%= @service.user.first_name %> - Service: <%= @service.title %></h5>
-        <%= simple_form_for([@service, @service.bookings.new], wrapper: :vertical_form, html: { class: 'form-horizontal' }) do |f| %>
-          <div class="form-row">
-            <div class="form-group col-md-8">
-              <%= f.input :date, as: :string, label: 'Choose a date', input_html: { data: { controller: "datepicker" } }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
-              <%= f.input :start_time, as: :time, label: 'Choose a time', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
+  <div class="row">
+    <!-- Left Section -->
+    <div class="col-md-8">
+      <!-- Service Details -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <!-- Flex container for title, description, and icons -->
+          <div class="service-details-container d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <h5 class="card-title mb-0"><%= @service.title %></h5>
+              <p class="card-text"><%= @service.description %></p>
             </div>
-          </div>
-          <p style="font-weight: bold; font-size: 17px"> Price: <%= @service.price %> € </p>
-          <%= f.button :submit, "Book Now", class: "btn btn-primary btn-lg btn-block" %>
-        <% end %>
-      </div>
-    <!-- ABOUT THE SERVICE -->
-      <div class="d-flex mb-3">
-        <div class="card shadow flex-fill" style="border-radius: 15px;">
-          <div class="card-body">
-            <h5 class="card-title">About the <%= @service.title %> service</h5>
-            <p class="card-text"><%= @service.description %></p>
-          </div>
-        </div>
-      </div>
-    <!-- SERVICE REVIEWS -->
-      <div class="card shadow mb-3">
-        <div class="card-body mb-4">
-          <h5 class="card-title">Reviews for <%= @service.title %></h5>
-          <% reviews = @service.bookings.includes(:review).map(&:review).compact %>
-          <% if reviews.any? %>
-          <% reviews.each do |review| %>
-            <div class="review card card-body">
-              <div class="review-user mb-2">
-                <%= image_tag review.user.profile_picture, class: "avatar" %>
-                <p><%= review.user.first_name %> <%= review.user.last_name %></p>
-              </div>
-              <div class="review-rating mb-1">
-                <% review.rating.times do %>
-                  <i class="fas fa-star text-warning"></i>
-                <% end %>
-                <% (5 - review.rating).times do %>
-                  <i class="fas fa-star"></i>
-                <% end %>
-              </div>
-            <div class="review-description">
-              <p><%= review.description %></p>
-            </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p>No reviews yet for this service.</p>
-        <% end %>
-        </div>
-      </div>
-    </div>
-
-
-  <!-- Not Sticky Section -->
-    <div class="d-flex flex-column" style="margin-left: 40px; max-width: 500px;">
-      <!-- Map Section -->
-      <div class="d-flex mb-3 card">
-        <div style="width: 500px; height: 500px;"
-              class="custom-map"
-              data-controller="map"
-              data-map-markers-value="<%= @markers.to_json %>"
-              data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-        </div>
-      </div>
-
-      <!-- Reviews Section-->
-
-    <!-- About Section -->
-      <div class="d-flex mb-3">
-        <div class="card shadow w-100">
-          <div class="card-body">
-            <h5 class="card-title">About <%= @service.user.first_name %></h5>
-            <p class="card-text"><%= @service.description %></p>
-          </div>
-        </div>
-      </div>
-
-    <!-- Other Services Section -->
-      <div class="d-flex mb-3">
-        <div class="card shadow w-100">
-          <div class="card-body">
-            <h5 class="card-title">Other services - by <%= @service.user.first_name %></h5>
-            <ul class="list-group list-group-flush">
-              <% @service.user.services.each do |other_service| %>
-                <li class="list-group-item">
-                  <div class="d-flex justify-content-between">
-                  <%= link_to other_service.title, service_path(other_service), class: "d-flex justify-content-between" %>
-                  <span><%= number_to_currency(other_service.price.round, unit: '€') %></span>
-                  </div>
+            <div class="pet_categories">
+            <ul class="list-inline">
+              <% @service.pet_categories.each do |pet_category| %>
+                <li class="list-inline-item">
+                  <% pet = pet_category.pet_category.downcase.gsub(' ', '-') %>
+                  <%= image_tag "icons/#{pet}.svg", class: "icon icon-tag" %>
                 </li>
               <% end %>
             </ul>
           </div>
+          </div>
+            <br>
+            <br>
+          <div class="user-info-container d-flex align-items-center">
+            <%= cl_image_tag @service.user.profile_picture.key, class: "rounded-circle mr-3", width: 50, height: 50, crop: :fill %>
+            <h5 class="card-title mb-0"><%= @service.user.first_name %> <%= @service.user.last_name.chars.first %>.</h5>
+          </div>
+          <div class="user-about-container" style="padding-left: calc(50px + 15px);">
+            <p class="card-text"><%= @service.user.about %></p>
+          </div>
         </div>
       </div>
 
+
+      <div class="map">
+        <div class="d-flex mb-3 card">
+          <div style="width: 860px; height: 500px;"
+                class="custom-map"
+                data-controller="map"
+                data-map-markers-value="<%= @markers.to_json %>"
+                data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Reviews -->
+      <div class="card mb-3 bg-transparent">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Reviews</h5>
+          <% @service.bookings.each do |booking| %>
+            <% if booking.review.present? %>
+              <div class="review-card mb-2">
+                <div class="d-flex justify-content-between align-items-center align-items-center mb-1">
+                  <div class="name-img-reviewer">
+                    <%= cl_image_tag(booking.user.profile_picture.key, class: 'rounded-circle mr-2', height: 30, width: 30, crop: :fill) %>
+                    <strong><%= booking.user.first_name %> <%= booking.user.last_name.chars.first %>.</strong>
+                  </div>
+                  <div class="review-rating pt-2">
+                    <% rating = booking.review.rating %>
+                    <% 5.times do |i| %>
+                      <i class="fas fa-star <%= 'text-warning' if i < rating %>"></i>
+                    <% end %>
+                  </div>
+                </div>
+                <p class="review-comment mb-1"><%= booking.review.description %></p>
+                <small class="text-muted"><%= distance_of_time_in_words(booking.review.created_at, Time.now) %> ago</small>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section (Booking Form) -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Book This Service</h5>
+          <%= simple_form_for([@service, @service.bookings.new], wrapper: :vertical_form, html: { class: 'form-horizontal' }) do |f| %>
+            <%= f.input :date, as: :string, label: 'Choose a date', input_html: { data: { controller: "datepicker" } }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
+            <%= f.input :start_time, as: :time, label: 'Choose a time', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' }, minute_step: 30 %>
+            <p style="font-weight: bold; font-size: 18px">Price: <%= @service.price %> €</p>
+            <%= f.button :submit, "Book Now", class: "btn btn-primary btn-lg btn-block" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
