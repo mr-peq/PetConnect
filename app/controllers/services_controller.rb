@@ -7,7 +7,6 @@ class ServicesController < ApplicationController
 
   def index
     @services = Service.all
-    @max_price = Service.maximum(:price)
 
     if params[:query].present? && params[:query] != ""
       @services = Service.global_search(params[:query])
@@ -26,6 +25,12 @@ class ServicesController < ApplicationController
         lat: service.latitude,
         lng: service.longitude
       }
+    end
+
+    @max_price = Service.maximum(:price)
+
+    if params[:min_price].present? && params[:max_price].present?
+      @services = @services.where(price: params[:min_price]..params[:max_price])
     end
   end
 
