@@ -7,7 +7,12 @@
 //   transform: translateY(0);
 //   transition: transform 0.3s ease-out;
 // }
-
+// .navbar-sticky {
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   z-index: 1000; /* Ensure it stays on top of other elements */
+// }
 
 .navbar-lewagon {
   margin-bottom: 0;
@@ -57,4 +62,13 @@
 
 .nav-link:hover {
   text-decoration: none;
+}
+
+.nav-tabs .nav-link:hover {
+  color: black; /* Change to your preferred color */
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+  color: #6959A5; /* Desired hover color */
+  text-decoration: none; /* Remove text-decoration */
 }

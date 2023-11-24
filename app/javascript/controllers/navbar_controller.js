@@ -1,20 +1,31 @@
 // import { Controller } from "@hotwired/stimulus"
 
-// // Connects to data-controller="navbar"
 // export default class extends Controller {
-
 //   connect() {
-//     console.log("navbar controller connected")
-//     window.addEventListener("scroll", () => this.updateNavbar());
+//     this.isHomepage = document.body.classList.contains("homepage");
+//     this.lastScrollTop = 0;
+//     window.addEventListener('scroll', this.handleScroll.bind(this));
+
+//     if (!this.isHomepage) {
+//       this.element.classList.remove("d-none");
+//     }
 //   }
 
-//   updateNavbar() {
-//     if (window.scrollY >= window.innerHeight/3) {
-//       this.element.classList.remove("navbar-hidden")
-//       this.element.classList.add("navbar-visible")
-//     } else {
-//       this.element.classList.remove("navbar-visible")
-//       this.element.classList.add("navbar-hidden")
+//   handleScroll() {
+//     let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+//     if (this.isHomepage) {
+//       if (currentScroll > this.lastScrollTop) {
+//         this.element.classList.add("d-none");
+//       } else {
+//         this.element.classList.remove("d-none");
+//       }
 //     }
+
+//     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+//   }
+
+//   disconnect() {
+//     window.removeEventListener('scroll', this.handleScroll);
 //   }
 // }

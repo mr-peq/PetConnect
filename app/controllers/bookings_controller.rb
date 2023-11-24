@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_service, only: [:create]
+  before_action :set_service, only: [:create, :edit]
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
   def index
