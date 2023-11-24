@@ -48,7 +48,7 @@ PetCategory.destroy_all
   ]
 
 # Addresses
-  addresses = ["76 Faubourg Saint Honoré, 75018", "3 rue Nationale, 75006", "19 Place de la Madeleine, 75010", "32 rue Nationale, 75006", "97 rue La Boétie, 75015", "18 rue Nationale, 75007", "3 Square de la Couronne, 75001", "51 Faubourg Saint Honoré, 750019", "8 Rue Lacretelle, 75015", "14 Avenue Marcel Proust, 75016", "234 Rue Championnet, 75018"]
+  addresses = ["76 Faubourg Saint Honoré, 75018", "3 rue Nationale, 75006", "19 Place de la Madeleine, 75010", "32 rue Nationale, 75006", "97 rue La Boétie, 75015", "18 rue Nationale, 75007", "3 Square de la Couronne, 75001", "51 Faubourg Saint Honoré, 750019", "8 Rue Lacretelle, 75015", "14 Avenue Marcel Proust, 75016", "234 Rue Championnet, 75018", "14 Avenue Philippe Auguste, 75011", "16 Villa Gaudelet, 75011", "13 Bd Barbès, 75018", "78 Bd Ménilmontant, 75011"]
 
 # Bios
   abouts = ["Life's motto: pet all the dogs and spoil all the cats.",
@@ -104,6 +104,7 @@ puts "Creating services..."
 User.where(provider: true).each do |user|
   rand(2..7).times do
     service = Service.new(
+      address: addresses.sample,
       title: services.sample,
       description: Faker::Lorem.sentence,
       price: rand(10..100),
