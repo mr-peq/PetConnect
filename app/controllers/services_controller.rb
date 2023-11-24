@@ -7,6 +7,7 @@ class ServicesController < ApplicationController
 
   def index
     @services = Service.all
+    @max_price = Service.maximum(:price)
 
     if params[:query].present? && params[:query] != ""
       @services = Service.global_search(params[:query])
@@ -29,6 +30,12 @@ class ServicesController < ApplicationController
   end
 
   def show
+    @markers = Service.where(id: params[:id]).geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude
+      }
+    end
   end
 
   def new
